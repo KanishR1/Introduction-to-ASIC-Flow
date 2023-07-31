@@ -56,6 +56,7 @@ sudo apt-get install iverilog
 [GTKWave Section]:#
 ### **GTKWAVE**
 GTKWave is a fully featured GTK+ based wave viewer for Unix and Win32 which reads LXT, LXT2, VZT, FST, and GHW files as well as standard Verilog VCD/EVCD files and allows their viewing.
+
 **Steps to install GTKKwave**
 ```
 sudo apt install gtkwave
