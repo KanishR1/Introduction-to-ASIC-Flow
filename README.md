@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Week - 1](#week---1)
-    * [Day - 1](#day---1-software-installation)
+    * [Day - 1 : Software Installation](#day---1-software-installation)
 - [References](#references)
 
 ## Week - 1 
