@@ -28,3 +28,15 @@ sudo make install
 ```
 sudo apt-get install iverilog
 ```
+
+![iverilog](./softwares/iverilog.png)
+
+### Gtkwave
+
+**Steps to install GTKKwave**
+```
+sudo apt update
+sudo apt install gtkwave
+```
+
+![gtkwave](./softwares/gtkwave.png)
