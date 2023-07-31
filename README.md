@@ -6,11 +6,10 @@
 - [References](#references)
 
 ## Week - 1 
-
 ## Day - 1 :Software Installation
 
+[Yosys Section]:#
 ### **YOSYS**
-
 Yosys is a framework for Verilog RTL synthesis. It currently has extensive Verilog-2005 support and provides a basic set of synthesis algorithms for various application domains. Selected features and typical applications:
 
    1. Process almost any synthesizable Verilog-2005 design
@@ -40,28 +39,33 @@ sudo make install
 ![yosys](./softwares/yosys.png)    
 
 
-### ICARUS VERILOG
 
+
+[Icarus Verilog Section]:#
+### **ICARUS VERILOG**
 Icarus Verilog is an implementation of the Verilog hardware description language compiler that generates netlists in the desired format (EDIF). It supports the 1995, 2001 and 2005 versions of the standard, portions of SystemVerilog, and some extensions.Icarus Verilog is released under the GNU General Public License, Icarus Verilog is free software. Icarus is composed of a Verilog compiler (including a Verilog preprocessor) with support for plug-in backends, and a virtual machine that simulates the design.
 
 **Steps to install Icarus Verilog**
 ```
 sudo apt-get install iverilog
 ```
-
 ![iverilog](./softwares/iverilog.png)
 
-### GTKWAVE
+
+
+[GTKWave Section]:#
+### **GTKWAVE**
 GTKWave is a fully featured GTK+ based wave viewer for Unix and Win32 which reads LXT, LXT2, VZT, FST, and GHW files as well as standard Verilog VCD/EVCD files and allows their viewing.
 **Steps to install GTKKwave**
 ```
 sudo apt update
 sudo apt install gtkwave
 ```
-
 ![gtkwave](./softwares/gtkwave.png)
 
 
+
+[Reference Section]:#
 ## References
 1. https://yosyshq.net/yosys/
 2. https://steveicarus.github.io/iverilog/
