@@ -36,7 +36,7 @@ make config-gcc
 make 
 sudo make install
 ```
-![yosys](./softwares/yosys.png)    
+![yosys](./softwares_images/yosys.png)    
 
 
 
@@ -49,7 +49,7 @@ Icarus Verilog is an implementation of the Verilog hardware description language
 ```
 sudo apt-get install iverilog
 ```
-![iverilog](./softwares/iverilog.png)
+![iverilog](./softwares_images/iverilog.png)
 
 
 
@@ -61,7 +61,80 @@ GTKWave is a fully featured GTK+ based wave viewer for Unix and Win32 which read
 ```
 sudo apt install gtkwave
 ```
-![gtkwave](./softwares/gtkwave.png)
+![gtkwave](./softwares_images/gtkwave.png)
+
+
+
+
+[Ngspice Section]:#
+### **NGSPICE**
+ngspice is the open source spice simulator for electric and electronic circuits comprising of JFETs, bipolar and MOS transistors, passive elements like R, L, or C, diodes, transmission lines and other devices, all interconnected in a netlist. Digital circuits are simulated as well, event driven and fast, from single gates to complex circuits. And you may enter the combination of both analog and digital as a mixed-signal circuit. ngspice offers a wealth of device models for active, passive, analog, and digital elements. Model parameters are provided by our collections, by the semiconductor device manufacturers, or from semiconductor foundries. The user can add their circuits as a netlist, and the output is one or more graphs of currents, voltages and other electrical quantities or is saved in a data file.
+
+**Steps to install ngspice**</br>
+Download the tarball from ***https://sourceforge.net/projects/ngspice/files/*** to a local directory and then follow the commands given below :
+```
+tar -zxvf ngspice-37.tar.gz
+cd ngspice-40
+mkdir release
+cd release
+../configure  --with-x --with-readline=yes --disable-debug
+make
+sudo make install
+
+```
+![ngspice](./softwares_images/ngspice.png)
+
+
+
+
+[OpenSTA Section]: #
+### **OPENSTA**
+OpenSTA is a gate level static timing verifier. As a stand-alone executable it can be used to verify the timing of a design using standard file formats such as Verilog netlist, Liberty library, SDC timing constraints, SDF delay annotation and SPEF parasitics. OpenSTA uses a TCL command interpreter to read the design, specify timing constraints and print timing reports.
+
+**Steps to install OpenSTA**</br>
+Prior to the installation of the OpenSTA install the dependencies using the command shown below :</br>
+``` 
+sudo apt-get install cmake clang gcc tcl swig bison flex 
+```
+
+After installing the dependencies use the following command to install OpenSTA:
+```
+git clone https://github.com/The-OpenROAD-Project/OpenSTA.git
+cd OpenSTA
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+```
+![opensta](./softwares_images/OpenSTA.png)
+
+
+
+
+[Magic Section]:#
+### **MAGIC**
+Magic is an electronic design automation (EDA) layout tool for very-large-scale integration (VLSI) integrated circuit (IC) originally written by John Ousterhout and his graduate students at UC Berkeley. Work began on the project in February 1983. The main difference between Magic and other VLSI design tools is its use of "corner-stitched" geometry, in which all layout is represented as a stack of planes, and each plane consists entirely of "tiles" (rectangles). Magic is primarily famous for writing the scripting interpreter language Tcl.
+
+**Steps to install magic**</br>
+```
+sudo apt-get install m4
+sudo apt-get install tcsh
+sudo apt-get install csh
+sudo apt-get install libx11-dev
+sudo apt-get install tcl-dev tk-dev
+sudo apt-get install libcairo2-dev
+sudo apt-get install mesa-common-dev libglu1-mesa-dev
+sudo apt-get install libncurses-dev
+git clone https://github.com/RTimothyEdwards/magic
+cd magic
+./configure
+make
+sudo make install
+```
+![magic](./softwares_images/magic.png)
+
+
 
 
 
@@ -70,3 +143,6 @@ sudo apt install gtkwave
 1. https://yosyshq.net/yosys/
 2. https://steveicarus.github.io/iverilog/
 3. https://gtkwave.sourceforge.net/
+4. https://ngspice.sourceforge.io/
+5. https://github.com/The-OpenROAD-Project/OpenSTA
+6. http://opencircuitdesign.com/magic/
