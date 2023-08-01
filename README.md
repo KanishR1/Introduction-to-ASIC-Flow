@@ -135,6 +135,44 @@ sudo make install
 ![magic](./softwares_images/magic.png)
 
 
+[OpenLane Section]:#
+### **OPENLANE**
+OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, CVC, SPEF-Extractor, KLayout and a number of custom scripts for design exploration and optimization. It also provides a number of custom scripts for design exploration and optimization. The flow performs all ASIC implementation steps from RTL all the way down to GDSII. Currently, it supports both A and B variants of the sky130 PDK, the C variant of the gf180mcu PDK, and instructions to add support for other (including proprietary) PDKs are documented. OpenLane abstracts the underlying open source utilities, and allows users to configure all their behavior with just a single configuration file.
+
+Prior to the installation of the OpenLane install the dependencies and packages using the command shown below :</br>
+``` 
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install -y build-essential python3 python3-venv python3-pip make git
+```
+Docker Installation :</br>
+```
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+sudo docker run hello-world
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo reboot 
+
+
+# Check for installation
+sudo docker run hello-world
+```
+
+**Steps to install OpenLane, PDKs and Tools**</br>
+```
+cd $HOME
+git clone https://github.com/The-OpenROAD-Project/OpenLane
+cd OpenLane
+make
+make test
+```
 
 
 
@@ -146,3 +184,4 @@ sudo make install
 4. https://ngspice.sourceforge.io/
 5. https://github.com/The-OpenROAD-Project/OpenSTA
 6. http://opencircuitdesign.com/magic/
+7. https://github.com/The-OpenROAD-Project/OpenLane
