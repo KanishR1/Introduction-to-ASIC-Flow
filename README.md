@@ -73,7 +73,11 @@ ngspice is the open source spice simulator for electric and electronic circuits 
 **Steps to install ngspice**</br>
 Download the tarball from ***https://sourceforge.net/projects/ngspice/files/*** to a local directory and then follow the commands given below :
 ```
-tar -zxvf ngspice-37.tar.gz
+# Dependency for ngspice:
+sudo apt-get install libxaw7-dev
+
+# ngspice installation:
+tar -zxvf ngspice-40.tar.gz
 cd ngspice-40
 mkdir release
 cd release
