@@ -301,6 +301,50 @@ The .lib file is a library of standard cells that can be used to implement any l
 
 It is necessary to provide information for the synthesis toolregarding the choice of cells. Overuse of faster cells increases area and power demands, while also it leads to hold time violations. Conversely, excessive use of slower cells results in poor performance requirements. The optimal cell selection for the synthesizer is guided by constraints that dictate the appropriate cell set to use.
 
+### **Setup Time and Hold Time**
+
+### **Yosys Illustration**
+Step 1: Change the current working directory to the directory containing the Verilog files using the following command :
+```
+cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+```
+
+Step 2: Invoke the yosys 
+```
+yosys
+```
+
+Step 3: Read the liberty file 
+```
+read_liberty -lib /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+```
+
+Step 4: Read the verilog design file
+```
+read_verilog good_mux.v 
+```
+
+Step 5: Link the module
+```
+synth -top good_mux
+```
+
+Step 6: Generate the netlist
+```
+abc -liberty /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+
+Step 7: View the netlist
+```
+show
+```
+
+Step 8: Write the netlist
+```
+write_verilog -noattr good_mux_netlist.v
+```
+
+
 [Reference Section]:#
 ## References
 1. https://yosyshq.net/yosys/
