@@ -191,11 +191,106 @@ A simulator is a software tool that can be used to check the functionality of a 
 
 **Steps to download the lab folder**</br>
 ```
+mkdir ASIC
+cd ASIC
 git clone https://github.com/kunalg123/vsdflow.git
 git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
 ```
 
+Command to view the folder structure of the lab, and list the contents of the directory:
+```
+cd ASIC/sky130RTLDesignAndSynthesisWorkshop/
+ls -l
+```
+The lib folder contains all the library files needed for the lab, including the sky130 standard cell library. The verilog_model folder in ***/home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/my_lib*** contains the verilog models of the standard cells present in the .lib file. The verilog_files folder contains all the lab experiment verilog source files and corresponding testbench files needed to simulate the designs.
 
+---
+
+**Standard cell library** - It is a collection of well defined and appropriately characterized logic gates that can be used to implement a digital design. Timing data of standard cells is provided in the Liberty format.
+
+---
+
+### **Demostration of the Icarus Verilog and GTKWave**
+Change the current working directory to the directory containing the Verilog files using the following command :
+```
+cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+```
+Simulate the RTL design and testbench using the following command:
+```
+iverilog good_mux.v tb_good_mux.v 
+
+``` 
+The above command will compile and check for the syntax errors in both the design and testbench. Upon compiling successfully it will generate an executable file ***a.out***.</br>
+
+Execute the a.out using the command **```./a.out ```**, resulting in the generation of a tb_good_mux.vcd file that captures changes in the input and output values.
+This vcd file is given as the input to the GTKWave to view the wave form.
+In GTKWave drag and drop the required input and output signals to view the waveform. Since the simulation is done for long amount of time use the zoom to fit option to view the entire waveform.
+
+Commands to execute to view the waveform :
+```
+./a.out
+gtkwave tb_good_mux.vcd
+```
+
+### **Description of the Verilog code**
+To view the contents of the verilog files good_mux.v and tb_good_mux.v use the following command:
+```
+gvim -o good_mux.v tb_good_mux.v # -o is to open multiple windows at a time.
+```
+The verilog code of the good_mux.v is given below:
+```
+// Verilog Code for 2:1 Mux
+
+/*
+All verilog code starts with module, ends with endmodule and within them the logic is written. 
+For RTL design portlist should be mentioned in the module and it should have atleast one input port and one output port.
+In this design there are two data input ports, one select line input port and one output port. 
+*/
+
+module good_mux (input i0 , input i1 , input sel , output reg y);
+always @ (*) // Whenever any one of the input changes execute the code enclosed between begin ... end
+begin
+	if(sel) //If sel = 1 then output y follows i1 else output y follows i0 
+		y <= i1;
+	else 
+		y <= i0;
+end
+endmodule
+```
+
+The verilog code for the tb_good_mux.v is given below:
+```
+`timescale 1ns / 1ps // defines the time units and time precision for simulation.
+module tb_good_mux; // AS mentioned earlier testbench doesnot have input and output ports
+	// Inputs
+	reg i0,i1,sel;
+	// Outputs
+	wire y;
+
+        // Instantiate the Unit Under Test (UUT)
+	good_mux uut (
+		.sel(sel),
+		.i0(i0),
+		.i1(i1),
+		.y(y)
+	);
+
+	initial begin
+	$dumpfile("tb_good_mux.vcd"); //This system task specifies the name of the VCD file where simulation waveform data will be written
+	$dumpvars(0,tb_good_mux); //This system task is used to specify which signals within a module should be included in the VCD file for waveform dumping.
+	// Initialize Inputs
+	sel = 0;
+	i0 = 0;
+	i1 = 0;
+	#300 $finish; //Terminate the simulation after 300ns
+	end
+
+always #75 sel = ~sel;  //Toggle the value of the select line after 75ns
+always #10 i0 = ~i0;   //Toggle the value of the select line after 10ns
+always #55 i1 = ~i1;  //Toggle the value of the select line after 55ns
+endmodule
+
+```
 
 
 [Reference Section]:#
@@ -207,3 +302,4 @@ git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
 5. https://github.com/The-OpenROAD-Project/OpenSTA
 6. http://opencircuitdesign.com/magic/
 7. https://github.com/The-OpenROAD-Project/OpenLane
+8. https://www.eng.biu.ac.il/temanad/digital-vlsi-design/
