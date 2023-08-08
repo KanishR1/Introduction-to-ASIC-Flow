@@ -2,11 +2,13 @@
 
 ## Table of Contents
 - [Week - 1](#week---1)
-    * [Day - 1 : Software Installation](#day---1-software-installation)
+    * [Day - 1 : Software Installation](#day---1--software-installation)
+- [Week - 2](#week---2)
+    * [Day - 1 : Introduction to Verilog RTL Design and Synthesis](#day---1--introduction-to-verilog-rtl-design-and-synthesis)
 - [References](#references)
 
 ## Week - 1 
-## Day - 1 :Software Installation
+## Day - 1 : Software Installation
 
 [Yosys Section]:#
 ### **YOSYS**
@@ -178,6 +180,21 @@ cd OpenLane
 make
 make test
 ```
+
+
+
+## Week - 2
+## Day - 1 : Introduction to Verilog RTL Design and Synthesis
+
+### **Introduction to Simulator**
+A simulator is a software tool that can be used to check the functionality of a circuit design before it is implemented in hardware. It does this by simulating the behavior of the design in software, using a Hardware Description Language (HDL) such as Verilog or VHDL. The Register Tranfer Level (RTL) design is the actual Verilog code that implements the circuit. To verify the correctness of the RTL design with the specification, a testbench is written in HDL and simulated using the open-source simulator, Icarus Verilog. The testbench generates stimulus signals that are applied to the RTL design, and the simulator monitors the output signals to ensure that they are correct. The simulator monitors changes in the input signals. When an input signal changes, the simulator re-evaluates the RTL design and updates the output signals. The simulator records the changes in the input and output signals in a file called a Value Change Dump (VCD) file. This file is used to visualize the behavior of the design over time in the form of waveforms. A tool called GTKWave is used to open the VCD file and view the which helps in debugging the design and verifying its functionality in accordance with the specification.
+
+**Steps to download the lab folder**</br>
+```
+git clone https://github.com/kunalg123/vsdflow.git
+git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+```
+
 
 
 
