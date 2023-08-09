@@ -212,6 +212,17 @@ The lib folder contains all the library files needed for the lab, including the 
 
 **Standard cell library** - It is a collection of well defined and appropriately characterized logic gates that can be used to implement a digital design. Timing data of standard cells is provided in the Liberty format.
 
+The lib directory contains the library file **sky130_fd_sc_hd__tt_025C_1v80.lib**. Libraries in the SKY130 PDK are named using the following scheme:</br>
+***<Process_name>_<Library_Source_Abbreviation>_<Library_type_abbreviation>[_<Library_name]***</br>
+
+sky130 - Process Technology of the PDK sky130</br>
+fd - SkyWater Foundry</br>
+sc - Digital standard cells</br>
+hd - High density</br>
+tt - Typical Timing</br>
+025C - 25 degree celsius Temperature</br>
+1v80 - 1.8V Supply Voltage</br>
+
 ---
 
 ### **Demostration of the Icarus Verilog and GTKWave**
@@ -419,3 +430,4 @@ The netlist and the write_verilog command is shown below:
 7. https://github.com/The-OpenROAD-Project/OpenLane
 8. https://www.eng.biu.ac.il/temanad/digital-vlsi-design/
 9. https://yosyshq.readthedocs.io/projects/yosys/en/latest/cmd_ref.html
+10. https://www.youtube.com/watch?v=EczW2IWdnOM
