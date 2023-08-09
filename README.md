@@ -317,45 +317,94 @@ It is necessary to provide information for the synthesis toolregarding the choic
 ### **Setup Time and Hold Time**
 
 ### **Yosys Illustration**
-Step 1: Change the current working directory to the directory containing the Verilog files using the following command :
+**Step 1:** Change the current working directory to the directory containing the Verilog files using the following command :
 ```
 cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
 ```
 
-Step 2: Invoke the yosys 
+**Step 2:** Invoke the yosys 
 ```
 yosys
 ```
 
-Step 3: Read the liberty file 
+**Step 3:** Read the liberty file 
 ```
 read_liberty -lib /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 ```
 
-Step 4: Read the verilog design file
+
+**Step 4:** Read the verilog design file
 ```
 read_verilog good_mux.v 
 ```
 
-Step 5: Link the module
+---
+
+**read_liberty** - Read cells from liberty file as modules into current design. The ***-lib*** switch creates empty blackbox modules.</br>
+**read_verilog** - Loads modules from  verilog file to the current design.
+
+---
+
+![read_yosys_commands](./images/day_1/read_yosys_commands.png)
+
+
+
+**Step 5:** Synthesize the verilog file.
 ```
 synth -top good_mux
 ```
 
-Step 6: Generate the netlist
+___
+**synth** - command runs the default synthesis script. The ***-top*** switch use the specified module as top module.
+___
+
+![synth_op](./images/day_1/synth_op.png)
+
+The output of the synthesis displays the number of wires used , number of standard cells used and the name of the standard cell. 
+
+
+**Step 6:** Generate the netlist
 ```
 abc -liberty /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 ```
 
-Step 7: View the netlist
+___
+**abc** -  This command uses the ABC tool for technology mapping of yosys's internal gate library to a target architecture. The ***-lib*** switch liberty <file>
+generate netlists for the specified cell library using the liberty file format.
+___
+
+![abc_op](./images/day_1/abc_op.png)
+
+The output of the synthesis displays the number of input and output signals and the name of the standard cell that is used. 
+
+
+**Step 7:** View the netlist
 ```
 show
 ```
 
-Step 8: Write the netlist
+___
+**show** - Creates a graphviz DOT file for the selected part of the design and compile it to a graphics file. It generates a schematic.
+___
+
+![show_op](./images/day_1/show_op.png)
+
+In the schematic there is sky130 based 2:1 multiplexer standard cell with three inputs and one output.
+
+
+**Step 8:** Write the netlist
 ```
 write_verilog -noattr good_mux_netlist.v
 ```
+___
+**write_verilog** - Writes the current design to a Verilog file. The ***-noattr** switch skips the attributes from included in the output netlist.
+___
+
+The netlist and the write_verilog command is shown below:
+
+![write_op](./images/day_1/write_op.png)
+
+![netlist_op](./images/day_1/netlist_op.png)
 
 
 
@@ -369,3 +418,4 @@ write_verilog -noattr good_mux_netlist.v
 6. http://opencircuitdesign.com/magic/
 7. https://github.com/The-OpenROAD-Project/OpenLane
 8. https://www.eng.biu.ac.il/temanad/digital-vlsi-design/
+9. https://yosyshq.readthedocs.io/projects/yosys/en/latest/cmd_ref.html
