@@ -408,7 +408,7 @@ In the schematic there is sky130 based 2:1 multiplexer standard cell with three 
 write_verilog -noattr good_mux_netlist.v
 ```
 ___
-**write_verilog** - Writes the current design to a Verilog file. The ***-noattr** switch skips the attributes from included in the output netlist.
+**write_verilog** - Writes the current design to a Verilog file. The ***-noattr*** switch skips the attributes from included in the output netlist.
 ___
 
 The netlist and the write_verilog command is shown below:
