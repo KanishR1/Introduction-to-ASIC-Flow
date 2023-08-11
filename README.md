@@ -5,6 +5,7 @@
     * [Day - 1 : Software Installation](#day---1--software-installation)
 - [Week - 2](#week---2)
     * [Day - 1 : Introduction to Verilog RTL Design and Synthesis](#day---1--introduction-to-verilog-rtl-design-and-synthesis)
+	* [Day - 2 : Timing libs, Hierarchical vs Flat Synthesis and Efficient flop coding styles](#day---2--timing-libs-hierarchical-vs-flat-synthesis-and-efficient-flop-coding-styles)
 - [References](#references)
 
 ## Week - 1 
@@ -408,7 +409,7 @@ In the schematic there is sky130 based 2:1 multiplexer standard cell with three 
 write_verilog -noattr good_mux_netlist.v
 ```
 ___
-**write_verilog** - Writes the current design to a Verilog file. The ***-noattr*** switch skips the attributes from included in the output netlist.
+**write_verilog** - Writes the current design to a Verilog file. The ***-noattr** switch skips the attributes from included in the output netlist.
 ___
 
 The netlist and the write_verilog command is shown below:
@@ -416,6 +417,29 @@ The netlist and the write_verilog command is shown below:
 ![write_op](./images/day_1/write_op.png)
 
 ![netlist_op](./images/day_1/netlist_op.png)
+
+
+
+
+## Day - 2 : Timing libs, Hierarchical vs Flat Synthesis and Efficient flop coding styles
+### **Exploring the Contents of .lib File**
+To view the contents inside the .lib file type the following command :
+```
+cd ASIC/sky130RTLDesignAndSynthesisWorkshop/lib/
+gvim sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+One of the fundamental parameter stored within .lib files comprises PVT parameters, where P signifies Process, V represents Voltage, and T denotes Temperature. 
+The variations in these parameters can cause significant changes in the performance of circuits.
+
+1. Process Variation: During the manufacturing process, there may be some deviations in the transistor characteristics, causing non-uniformity across the semiconductor wafer. Critical parameters like oxide thickness, dopant concentration, and transistor dimensions experience alterations.
+
+2. Voltage Variation: Voltage regulators might exhibit variability in their output voltage over time, inducing fluctuations in current and impacting the operational speed of circuits. 
+
+3. Temperature Variation: The functionality of a semiconductor device is sensitive to changes in temperature, particularly at the internal junctions of the chip. 
+
+Further it contains the technology that is used is CMOS for which delay are modelled  through table lookup. This file also defines the units for parameters like voltage, power, current, capacitance, and resistance. Within the .lib library, each standard cell consists a  set of parameters specific to that cell's features.
+
+Lets consider the different variations of the and gates
 
 
 
