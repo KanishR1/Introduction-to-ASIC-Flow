@@ -454,6 +454,49 @@ Consider the different versions of the same logic gate shown below:
 In all the three the logic inferred is same bu the area is different. Wider cells consume more power but delay wise it is less. The leakage power in the wider cell is more compared to the narrow cell which is depicted in the image .
 
 ## **Hiererchical Synthesis and Flat Synthesis**
+Hierarchical synthesis is breaking a comples modules into smaller, more manageable sub-modules or blocks. Each of these sub-modules can be synthesized or designed independently before being integrated into the larger system. This approach allows for efficient design, optimization, and verification of individual components while maintaining a structured and organized design process. An illustration of the hierarchical synthesis is shown below :
+
+Consider the verilog file multiple module which is given in the verilog_files directory
+
+ ```
+module sub_module2 (input a, input b, output y);
+	assign y = a | b;
+endmodule
+
+module sub_module1 (input a, input b, output y);
+	assign y = a&b;
+endmodule
+
+
+module multiple_modules (input a, input b, input c , output y);
+	wire net1;
+	sub_module1 u1(.a(a),.b(b),.y(net1));  //net1 = a&b
+	sub_module2 u2(.a(net1),.b(c),.y(y));  //y = net1|c ,ie y = a&b + c;
+endmodule
+ ```
+
+ In this case the module multiple_modules iinstantiates two sub_modules where the sub_module1 implements the AND gate and sub_module2 implemets the OR gate which are integrated in the multiple_modules.  Synthesis the multiple module using the sollowing commands:
+ ```
+ cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+ yosys
+ read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ read_verilog 
+ read_verilog multiple_modules.v 
+ synth -top multiple_modules
+ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ show multiple_modules
+ write_verilog multiple_modules_hier.v
+ ``` 
+ ___
+ Note:
+ When using hierarchical design instead of enetering the ***show*** command to view the file ***show <module_name>*** must be otherwise yosys will generate the following error : "ERROR: For formats different than 'ps' or 'dot' only one module must be selected."
+ ___
+
+ ![hier_show](./images/day_2/hierarchi_des.png)
+ ![netlist_hier](./images/day_2/netlist_hier.png)
+ 
+ Yosys does not show the AND gate and OR gate in the synthesis instead it shows the submodule names. The netlist also contains the AND and OR logic in separate submodules. Some times yosys may optimize the design such that the OR gate will be created using NAND gates. It is because the CMOS structure of the OR gate which is shown below has two pmos transistors stacked together. The mobility of the holes is less than the mobility of the electrons , since mosfets are majority carrier devices and majority carrier of the pmos is holes it increases the delay hence it becomes a bad circuit. In NAND gate implementation only the nmos are stacked.
+ ![cmos_or](./images/day_2/CMOS_OR.jpg)
 
 
 [Reference Section]:#
