@@ -498,6 +498,40 @@ endmodule
  Yosys does not show the AND gate and OR gate in the synthesis instead it shows the submodule names. The netlist also contains the AND and OR logic in separate submodules. Some times yosys may optimize the design such that the OR gate will be created using NAND gates. It is because the CMOS structure of the OR gate which is shown below has two pmos transistors stacked together. The mobility of the holes is less than the mobility of the electrons , since mosfets are majority carrier devices and majority carrier of the pmos is holes it increases the delay hence it becomes a bad circuit. In NAND gate implementation only the nmos are stacked.
  ![cmos_or](./images/day_2/CMOS_OR.jpg)
 
+Flattening the hierarchy means simplifying the hierarchical structure of a design by collapsing or merging lower-level modules or blocks into a single, unified representation. In yosys the flattening can be done with ***flat*** command. Yosys illustration of flattening the hiererchy.
+
+```
+cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+ yosys
+ read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ read_verilog 
+ read_verilog multiple_modules.v 
+ synth -top multiple_modules
+ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ flatten
+ show
+ write_verilog multiple_modules_flat.v
+```
+![flat_des](./images/day_2/flat_des.png)
+![netlist_flat](./images/day_2/netlist_flat.png)
+
+The flatten command breaks the hierarchy and makes the design into a single module by creating AND and OR gates for the logics inferred by the submodule which is shown in the images above.
+
+**Synthesising a Submodule :**
+Suppose a multiplier design needs to be used in numerous instances. Rather than undergoing synthesis six times independently, the preferred approach is to synthesize it once and then duplicate it within the primary module. Using module-level synthesis becomes advantageous when dealing with multiple occurrences of identical modules. Another reason for synthesizing submodule is to follow the principle of divide and conque for extensive designs that may not be optimized effectively, synthesizing the design module by module ensures that each module is effectively optimized.
+
+Steps to synthesis submodule : 
+```
+cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog 
+read_verilog multiple_modules.v 
+synth -top sub_module
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+```
+![submodule_demo](./images/day_2/submodule_synth.png)
 
 [Reference Section]:#
 ## References
