@@ -520,7 +520,8 @@ The flatten command breaks the hierarchy and makes the design into a single modu
 **Synthesising a Submodule :**
 Suppose a multiplier design needs to be used in numerous instances. Rather than undergoing synthesis six times independently, the preferred approach is to synthesize it once and then duplicate it within the primary module. Using module-level synthesis becomes advantageous when dealing with multiple occurrences of identical modules. Another reason for synthesizing submodule is to follow the principle of divide and conque for extensive designs that may not be optimized effectively, synthesizing the design module by module ensures that each module is effectively optimized.
 
-Steps to synthesis submodule : 
+**Steps to synthesis submodule :**
+ 
 ```
 cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
 yosys
