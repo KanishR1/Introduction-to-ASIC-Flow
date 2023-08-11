@@ -428,6 +428,8 @@ To view the contents inside the .lib file type the following command :
 cd ASIC/sky130RTLDesignAndSynthesisWorkshop/lib/
 gvim sky130_fd_sc_hd__tt_025C_1v80.lib
 ```
+![lib_img](./images/day_2/lib_img.png)
+
 One of the fundamental parameter stored within .lib files comprises PVT parameters, where P signifies Process, V represents Voltage, and T denotes Temperature. 
 The variations in these parameters can cause significant changes in the performance of circuits.
 
@@ -439,8 +441,19 @@ The variations in these parameters can cause significant changes in the performa
 
 Further it contains the technology that is used is CMOS for which delay are modelled  through table lookup. This file also defines the units for parameters like voltage, power, current, capacitance, and resistance. Within the .lib library, each standard cell consists a  set of parameters specific to that cell's features.
 
-Lets consider the different variations of the and gates
+Consider the a2111oi gate whose parameters and verilog files is shown below:
 
+![a2111o_img](./images/day_2/a2111o_img.png)
+![a2111o](./images/day_2/a2111o.png)
+
+This is a 2-input AND gate and a 4-input NOR gate. Within the .lib file, sevetral parameters specific to this particular standard cell is given, including leakage power values for every possible input combination, specifications regarding pin type and pin capacitances, internal power metrics, timing-related particulars, as well as area measurements and power-related specifics for the standard cells. Similarly for all the standard cells the parameters above mentioned is listed in the .lib file.
+
+Consider the different versions of the same logic gate shown below:
+![area_depict](./images/day_2/area_dep.png)
+
+In all the three the logic inferred is same bu the area is different. Wider cells consume more power but delay wise it is less. The leakage power in the wider cell is more compared to the narrow cell which is depicted in the image .
+
+## **Hiererchical Synthesis and Flat Synthesis**
 
 
 [Reference Section]:#
