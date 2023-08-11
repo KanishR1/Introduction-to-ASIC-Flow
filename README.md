@@ -488,7 +488,7 @@ endmodule
  write_verilog multiple_modules_hier.v
  ``` 
  ___
- Note:
+ **Note:**</br>
  When using hierarchical design instead of enetering the ***show*** command to view the file ***show <module_name>*** must be otherwise yosys will generate the following error : "ERROR: For formats different than 'ps' or 'dot' only one module must be selected."
  ___
 
@@ -521,7 +521,7 @@ The flatten command breaks the hierarchy and makes the design into a single modu
 Suppose a multiplier design needs to be used in numerous instances. Rather than undergoing synthesis six times independently, the preferred approach is to synthesize it once and then duplicate it within the primary module. Using module-level synthesis becomes advantageous when dealing with multiple occurrences of identical modules. Another reason for synthesizing submodule is to follow the principle of divide and conque for extensive designs that may not be optimized effectively, synthesizing the design module by module ensures that each module is effectively optimized.
 
 **Steps to synthesis submodule :**
- 
+
 ```
 cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
 yosys
