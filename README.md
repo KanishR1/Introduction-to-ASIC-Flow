@@ -570,8 +570,8 @@ write_verilog -noattr <netlist_name.v>
 ```
 
 ___
-**Note**:</br>
-dfflibmap - technology mapping of flip-flops
+***Note***:</br>
+**dfflibmap** - technology mapping of flip-flops</br>
 dfflibmap  -liberty - Maps internal flip-flop cells to the flip-flop cells in the technology library specified in the given liberty file.
 
 Generally in the flow there will be a separate .lib file for the flip-flops which needs to be used with the dfflibmap command.
