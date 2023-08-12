@@ -660,6 +660,35 @@ endmodule
 ![async_sync_reset_netlist](./images/day_2/async_sync_reset_net.png)
 
 
+
+### **Optimizations**
+During synthesis yosys will perform optimisations based on the logic that is being designed. An illustration of the yosys optimization is given below:
+
+**1. Optimisation Example 1**
+Consider the verilog design given below:
+```
+module mul2 (input [2:0] a, output [3:0] y);
+	assign y = a * 2;
+endmodule
+```
+This code performs multiplication of the input number by 2. Since the input is 3-bit binary number all the input and output combinations are as follows:
+| a2 a1 a0  |y3 y2 y1 y0   |
+|:---:|:---:|
+| 0 0 0 | 0 0 0 0  |
+| 0 0 1 | 0 0 1 0  |
+| 0 1 0 | 0 1 0 0  |
+| 0 1 1 | 0 1 1 0  |
+| 1 0 0 | 1 0 0 0  |
+| 1 0 1 | 1 0 1 0  |
+| 1 1 0 | 1 1 0 0  |
+| 1 1 1 | 1 1 1 0  |
+
+y0 is always 0 and the code doesn't need any hardware and it only needs the proper wiring of the input bits to the output and grounding the bit y0. The netlist of the design is shown below:
+
+
+
+
+
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
