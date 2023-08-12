@@ -665,6 +665,7 @@ endmodule
 During synthesis yosys will perform optimisations based on the logic that is being designed. An illustration of the yosys optimization is given below:
 
 **1. Optimisation Example 1**
+
 Consider the verilog design given below:
 ```
 module mul2 (input [2:0] a, output [3:0] y);
@@ -690,6 +691,7 @@ y0 is always 0 and the code doesn't need any hardware and it only needs the prop
 ![opt_net](./images/day_2/opt_net.png)
 
 **2. Optimisation Example 2**
+
 Consider the verilog design given below:
 ```
 module mult8 (input [2:0] a , output [5:0] y);
