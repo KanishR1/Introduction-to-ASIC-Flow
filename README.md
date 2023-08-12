@@ -698,7 +698,7 @@ module mult8 (input [2:0] a , output [5:0] y);
 	assign y = a * 9;
 endmodule
 ```
-In this design the 3-bit input number "a" is multiplied by 9 i.e.,(a*9) which can be re-written as (a\*8) + a . The term (a\*8) is nothing but a left shifting the number a by three bits. Consider that a = a2 a1 a0. (a\*8) results in a3 a2 a1 0 0 0. (a\*9)=(a\*8)+a = a3 a2 a1 a0 a3 a2 a1 a0 = aa(in 6 bit format). Hence in this case no hardware realization is required. So the synthesized netlist of this design is shown below:
+In this design the 3-bit input number "a" is multiplied by 9 i.e.,(a*9) which can be re-written as (a\*8) + a . The term (a\*8) is nothing but a left shifting the number a by three bits. Consider that a = a2 a1 a0. (a\*8) results in a2 a1 a0 0 0 0. (a\*9)=(a\*8)+a = a2 a1 a0 a2 a1 a0 = aa(in 6 bit format). Hence in this case no hardware realization is required. The synthesized netlist of this design is shown below:
 
 ![opt_2](./images/day_2/opt_2.png)
 
