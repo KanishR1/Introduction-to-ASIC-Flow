@@ -566,7 +566,7 @@ synth -top <top_module_name>
 dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
-write_verilog <netlist_name.v>
+write_verilog -noattr <netlist_name.v>
 ```
 
 ___
