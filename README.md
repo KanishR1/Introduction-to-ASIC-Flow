@@ -633,7 +633,7 @@ endmodule
 
 ![async_set_simu](./images/day_2/async_set_simu.png)
 
-![async_set_net](./images/day_2/async_set_simu.png)
+![async_set_net](./images/day_2/async_set_net.png)
 
 
 **4. D flip-flop with Asynchronous and Synchronous reset**</br>
