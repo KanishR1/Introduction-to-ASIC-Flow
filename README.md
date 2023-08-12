@@ -453,7 +453,7 @@ Consider the different versions of the same logic gate shown below:
 
 In all the three the logic inferred is same bu the area is different. Wider cells consume more power but delay wise it is less. The leakage power in the wider cell is more compared to the narrow cell which is depicted in the image .
 
-## **Hiererchical Synthesis and Flat Synthesis**
+### **Hiererchical Synthesis and Flat Synthesis**
 Hierarchical synthesis is breaking a comples modules into smaller, more manageable sub-modules or blocks. Each of these sub-modules can be synthesized or designed independently before being integrated into the larger system. This approach allows for efficient design, optimization, and verification of individual components while maintaining a structured and organized design process. An illustration of the hierarchical synthesis is shown below :
 
 Consider the verilog file multiple module which is given in the verilog_files directory
@@ -533,6 +533,13 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 ```
 ![submodule_demo](./images/day_2/submodule_synth.png)
+
+
+### **Flip-FLops**
+A flip-flop is a fundamental sequential synchronous electronic circuit that is capable of storing information. A single flip-flop can store 1- bit of information and several flip-flops can be grouped together to form registers and memory that can store multiple bits of information. There are several types of flip-flops like JK flip-flop, D flip-flop, T flip-flop and SR flip-flop but D flip-flop is widely and most commanly used since it transmits the input data to the output without performing any modifications. A D flop-flop needs two inputs : data and clock. The flip-flop can be positive-edge triggered or negative-edge triggered i.e, the output makes transition during the rising edge of the clock pulse if it is positive-edge triggered and if the output makes transition during the falling edge of the clock pulse then it is said to be negative- edge triggered.
+
+**Need of flip-flops**
+In any electronic circuit there will always be an propagation delay. These delays may cause glitches in the output which may cause the output to change its value when it is not supposed to change. As an illustration consider the circuit shoen below:
 
 [Reference Section]:#
 ## References
