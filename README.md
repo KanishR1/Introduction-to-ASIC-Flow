@@ -538,18 +538,29 @@ show
 ### **Flip-FLops**
 A flip-flop is a fundamental sequential synchronous electronic circuit that is capable of storing information. A single flip-flop can store 1- bit of information and several flip-flops can be grouped together to form registers and memory that can store multiple bits of information. There are several types of flip-flops like JK flip-flop, D flip-flop, T flip-flop and SR flip-flop but D flip-flop is widely and most commanly used since it transmits the input data to the output without performing any modifications. A D flop-flop needs two inputs : data and clock. The flip-flop can be positive-edge triggered or negative-edge triggered i.e, the output makes transition during the rising edge of the clock pulse if it is positive-edge triggered and if the output makes transition during the falling edge of the clock pulse then it is said to be negative- edge triggered.
 
-**Need of flip-flops**
-In any electronic circuit there will always be an propagation delay. These delays may cause glitches in the output which may cause the output to change its value when it is not supposed to change. As an illustration consider the circuit shoen below:
+**Need of flip-flops**</br>
+In any electronic circuit there will always be an propagation delay. These delays may cause glitches in the output which may cause the output state to change when it is not supposed to. Glitches are unwanted transitions in the output. As an illustration consider the circuit shown below:
+
+![glitch](./images/day_2/glitch.jpg)
+
+![glitch_plot](./images/day_2/glitch_plot.jpg)
+
+The propagation delay of the OR gate is 1ns and AND gate is 2ns. Initially a,b,c are 0,0,1 and the internal node i0 is 0 and the output Y is high. At t=0ns there is change in the inputs a,b,c becomes 1,1,0. Because of the propagation delays of the AND gate and OR gate at t=1ns the output node transits from high to low and since the input to the OR gate both i0 and c are 0. At t=2ns the internal node i0 transists from 0 to 1 and  the inputs to the OR gate becomes 1 and 0. Since the propagation delay of the OR gate is 1ns the output Y becomes high at 3ns and remains stable. Between 1ns and 3ns the output made an unwanted change in the transition resulting in a glitch.  
+
+In order to avoid the glitches a D flip-flop can be connected at the output so that the output will change only at the rising or falling edge of the clock. As mentioned earlier flip-flops generally needs two inputs: data and clock. But the problem is the initial state of the flip-flop is unknown. So in order to set the initial value of the flip-flop, two more inputs are provided : preset/set and reset. These additional inputs can be synchronous with clock or asynchronous with clock. 
+
+
 
 [Reference Section]:#
 ## References
-1. https://yosyshq.net/yosys/
-2. https://steveicarus.github.io/iverilog/
-3. https://gtkwave.sourceforge.net/
-4. https://ngspice.sourceforge.io/
-5. https://github.com/The-OpenROAD-Project/OpenSTA
-6. http://opencircuitdesign.com/magic/
-7. https://github.com/The-OpenROAD-Project/OpenLane
-8. https://www.eng.biu.ac.il/temanad/digital-vlsi-design/
-9. https://yosyshq.readthedocs.io/projects/yosys/en/latest/cmd_ref.html
+1.  https://yosyshq.net/yosys/
+2.  https://steveicarus.github.io/iverilog/
+3.  https://gtkwave.sourceforge.net/
+4.  https://ngspice.sourceforge.io/
+5.  https://github.com/The-OpenROAD-Project/OpenSTA
+6.  http://opencircuitdesign.com/magic/
+7.  https://github.com/The-OpenROAD-Project/OpenLane
+8.  https://www.eng.biu.ac.il/temanad/digital-vlsi-design/
+9.  https://yosyshq.readthedocs.io/projects/yosys/en/latest/cmd_ref.html
 10. https://www.youtube.com/watch?v=EczW2IWdnOM
+11. https://learn.digilentinc.com/Documents/277
