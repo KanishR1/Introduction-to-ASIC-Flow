@@ -572,8 +572,18 @@ A D flip-flop with asynchronous reset combines the functionality of a D flip-flo
 The verilog code, simulation and synthesis results are shown below:
 ```
 
+module dff_asyncres ( input clk ,  input async_reset , input d , output reg q );
+always @ (posedge clk , posedge async_reset)
+begin
+	if(async_reset)
+		q <= 1'b0;
+	else	
+		q <= d;
+end
+endmodule
 ```
 
+![async_res](./images/day_2/async_res.png)
 
 
 [Reference Section]:#
