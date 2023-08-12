@@ -526,7 +526,6 @@ Suppose a multiplier design needs to be used in numerous instances. Rather than 
 cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
 yosys
 read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
-read_verilog 
 read_verilog multiple_modules.v 
 synth -top sub_module
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
@@ -547,7 +546,33 @@ In any electronic circuit there will always be an propagation delay. These delay
 
 The propagation delay of the OR gate is 1ns and AND gate is 2ns. Initially a,b,c are 0,0,1 and the internal node i0 is 0 and the output Y is high. At t=0ns there is change in the inputs a,b,c becomes 1,1,0. Because of the propagation delays of the AND gate and OR gate at t=1ns the output node transits from high to low and since the input to the OR gate both i0 and c are 0. At t=2ns the internal node i0 transists from 0 to 1 and  the inputs to the OR gate becomes 1 and 0. Since the propagation delay of the OR gate is 1ns the output Y becomes high at 3ns and remains stable. Between 1ns and 3ns the output made an unwanted change in the transition resulting in a glitch.  
 
-In order to avoid the glitches a D flip-flop can be connected at the output so that the output will change only at the rising or falling edge of the clock. As mentioned earlier flip-flops generally needs two inputs: data and clock. But the problem is the initial state of the flip-flop is unknown. So in order to set the initial value of the flip-flop, two more inputs are provided : preset/set and reset. These additional inputs can be synchronous with clock or asynchronous with clock. 
+In order to avoid the glitches a D flip-flop can be connected at the output so that the output will change only at the rising or falling edge of the clock. As mentioned earlier flip-flops generally needs two inputs: data and clock. But the problem is the initial state of the flip-flop is unknown. So in order to set the initial value of the flip-flop, two more inputs are provided : preset/set and reset. These additional inputs can be synchronous with clock or asynchronous with clock.
+
+**Steps to simulate and generate the netlist for the below designs**
+
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+Generating netlist steps :
+```
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog <netlist_name.v>
+```
+
+___
+**Note**:</br>
+dfflibmap  -liberty - Maps internal flip-flop cells to the flip-flop cells in the technology library specified in the given liberty file.
+___
 
 **1. D flip-flop with Synchronous reset**</br>
 A D flip-flop with synchronous reset  combines the functionality of a D flip-flop with the ability to reset its state synchronously. This means that the flip-flop's stored value can be reset to 0 or low state based on a clock signal and a reset input, ensuring that the reset operation occurs when the clock signal transits.
