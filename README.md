@@ -549,6 +549,31 @@ The propagation delay of the OR gate is 1ns and AND gate is 2ns. Initially a,b,c
 
 In order to avoid the glitches a D flip-flop can be connected at the output so that the output will change only at the rising or falling edge of the clock. As mentioned earlier flip-flops generally needs two inputs: data and clock. But the problem is the initial state of the flip-flop is unknown. So in order to set the initial value of the flip-flop, two more inputs are provided : preset/set and reset. These additional inputs can be synchronous with clock or asynchronous with clock. 
 
+**1. D flip-flop with Synchronous reset**</br>
+A D flip-flop with synchronous reset  combines the functionality of a D flip-flop with the ability to reset its state synchronously. This means that the flip-flop's stored value can be reset to 0 or low state based on a clock signal and a reset input, ensuring that the reset operation occurs when the clock signal transits.
+The verilog code, simulation and synthesis results are shown below:
+```
+module dff_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+always @ (posedge clk )
+begin
+	if (sync_reset)
+		q <= 1'b0;
+	else	
+		q <= d;
+end
+endmodule
+```
+![sync_res](./images/day_2/sync_res.png)
+
+![sync_res_netlist](./images/day_2/sync_res_netlist.png)
+
+**2. DD flip-flop with Synchronous reset**</br>
+A D flip-flop with asynchronous reset combines the functionality of a D flip-flop with the ability to reset its state asynchronously. This means that the flip-flop's stored value can be reset to 0 or low state regardless of the clock signal's state.
+The verilog code, simulation and synthesis results are shown below:
+```
+
+```
+
 
 
 [Reference Section]:#
