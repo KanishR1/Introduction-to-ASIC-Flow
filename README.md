@@ -563,15 +563,15 @@ begin
 end
 endmodule
 ```
+
 ![sync_res](./images/day_2/sync_res.png)
 
 ![sync_res_netlist](./images/day_2/sync_res_netlist.png)
 
-**2. DD flip-flop with Synchronous reset**</br>
+**2. D flip-flop with Asynchronous reset**</br>
 A D flip-flop with asynchronous reset combines the functionality of a D flip-flop with the ability to reset its state asynchronously. This means that the flip-flop's stored value can be reset to 0 or low state regardless of the clock signal's state.
 The verilog code, simulation and synthesis results are shown below:
 ```
-
 module dff_asyncres ( input clk ,  input async_reset , input d , output reg q );
 always @ (posedge clk , posedge async_reset)
 begin
@@ -583,7 +583,53 @@ end
 endmodule
 ```
 
+![async_simu](./images/day_2/async_simu.png)
+
 ![async_res](./images/day_2/async_res.png)
+
+**3. D flip-flop with Asynchronous set**</br>
+A D flip-flop with asynchronous set combines the functionality of a D flip-flop with the ability to set its state asynchronously. This means that the flip-flop's stored value can be set to 1 or high state regardless of the clock signal's state.
+The verilog code, simulation and synthesis results are shown below:
+
+```
+module dff_async_set ( input clk ,  input async_set , input d , output reg q );
+always @ (posedge clk , posedge async_set)
+begin
+	if(async_set)
+		q <= 1'b1;
+	else	
+		q <= d;
+end
+endmodule
+```
+
+![async_set_simu](./images/day_2/async_set_simu.png)
+
+![async_set_net](./images/day_2/async_set_simu.png)
+
+
+**4. D flip-flop with Asynchronous and Synchronous reset**</br>
+A D flip-flop with both asynchronous and synchronous reset that combines the features of a D flip-flop with the ability to reset its state using either an asynchronous reset input or a synchronous reset input. This provides flexibility in resetting the flip-flop's state under different conditions.
+
+The verilog code, simulation and synthesis results are shown below:
+
+```
+module dff_asyncres_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+always @ (posedge clk , posedge async_reset)
+begin
+	if(async_reset)
+		q <= 1'b0;
+	else if (sync_reset)
+		q <= 1'b0;
+	else	
+		q <= d;
+end
+endmodule
+```
+
+![async_sync_reset](./images/day_2/async_sync_reset.png)
+
+![async_sync_reset_netlist](./images/day_2/async_sync_reset_net.png)
 
 
 [Reference Section]:#
