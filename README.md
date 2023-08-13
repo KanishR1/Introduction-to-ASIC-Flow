@@ -540,9 +540,9 @@ A flip-flop is a fundamental sequential synchronous electronic circuit that is c
 **Need of flip-flops**</br>
 In any electronic circuit there will always be an propagation delay. These delays may cause glitches in the output which may cause the output state to change when it is not supposed to. Glitches are unwanted transitions in the output. As an illustration consider the circuit shown below:
 
-![glitch](./images/day_2/glitch.jpg)
+![glitch](./images/day_2/glitch.png)
 
-![glitch_plot](./images/day_2/glitch_plot.jpg)
+![glitch_plot](./images/day_2/glitch_plot.png)
 
 The propagation delay of the OR gate is 1ns and AND gate is 2ns. Initially a,b,c are 0,0,1 and the internal node i0 is 0 and the output Y is high. At t=0ns there is change in the inputs a,b,c becomes 1,1,0. Because of the propagation delays of the AND gate and OR gate at t=1ns the output node transits from high to low and since the input to the OR gate both i0 and c are 0. At t=2ns the internal node i0 transists from 0 to 1 and  the inputs to the OR gate becomes 1 and 0. Since the propagation delay of the OR gate is 1ns the output Y becomes high at 3ns and remains stable. Between 1ns and 3ns the output made an unwanted change in the transition resulting in a glitch.  
 
