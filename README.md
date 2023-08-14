@@ -825,14 +825,39 @@ module opt_check (input a , input b , output y);
 endmodule
 ```
 The above code infers a multiplexer as shown below :
+
 ![opt_1](./images/day_3/opt_1.png)
+
 Since one of the inputs of the multiplexer is always connected to the ground it will infer an AND gate on optimisation.
+
 ![opt_1_opt](./images/day_3/opt_1_opt.png)
 
 The synthesis result and the netlist is shown below :
+
 ![opt_1_synth](./images/day_3/opt_1_synth.png)
+
 ![opt_1_net](./images/day_3/opt_1_net.png)
 
+#### **Example 2 **
+The verilog code for the exampple 2 is given below :
+```
+module opt_check2 (input a , input b , output y);
+	assign y = a?1:b;
+endmodule
+```
+The above code infers a multiplexer as shown below :
+
+![opt_2](./images/day_3/opt_2_opt.png)
+
+Since one of the inputs of the multiplexer is always connected to the logic 1 it will infer an OR gate on optimisation. The OR gate will be NAND implementation since NOR gate has stacked pmos while NAND implementation has stacked nmos.
+
+![opt_2_opt](./images/day_3/opt_2_opt_des.png)
+
+The synthesis result and the netlist is shown below :
+
+![opt_2_synth](./images/day_3/opt_2_synth.png)
+
+![opt_2_net](./images/day_3/opt_2_net.png)
 
 [Reference Section]:#
 ## References
