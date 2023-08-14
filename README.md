@@ -7,6 +7,8 @@
     * [Day - 1 : Introduction to Verilog RTL Design and Synthesis](#day---1--introduction-to-verilog-rtl-design-and-synthesis)
 	* [Day - 2 : Timing libs, Hierarchical vs Flat Synthesis and Efficient flop coding styles](#day---2--timing-libs-hierarchical-vs-flat-synthesis-and-efficient-flop-coding-styles)
 	* [Day - 3 : Combinational and Sequential Optimisations](#day---3--combinational-and-sequential-optimisations)
+	* [Day - 4 : Gate Level Simulation (GLS), Blocking Vs Non-blocking assignment and Synthesis-Simulation Mismatch](#day---4--gate-level-simulation-gls-blocking-vs-non-blocking-assignment-and-synthesis-simulation-mismatch)
+
 - [References](#references)
 
 ## Week - 1 
@@ -1288,7 +1290,52 @@ The simulation, synthesis result and the netlist are shown below :
 
 
 
+## Day - 4 : Gate Level Simulation (GLS), Blocking Vs Non-blocking assignment and Synthesis-Simulation Mismatch
 
+### **Gate Level Simulation**
+Gate Level Simulation helps ensure that the synthesized version of the design matches the specification both in terms of functionality and  timing. It helps identify mistakes and differences in the synthesised netlist and ensures that the final design functions as intended. Generally GLS is done to ensure that there is no synthesis-simulation mismatch. To perform the GLS the testbench that is used to verify the RTL is used. The GLS flow is similar to the testbench flow except that gate level verilog models are also used. It is necessary to mention the gatelevel verilog models  to iverilog to make the iverilog understand about the standard cell given in the library .GLS requires adding information about timing delays. Gate level Verilog models can be functional and timing aware. If the gate level models are delay annotated then it can used for timing validation. 
+
+![gls](./images/day_4/gls.png)
+
+### **Synthesis-Simulation Mismatch**
+Synthesis-simulation mismatch refers to the differences between the behavior of a digital circuit as simulated at the Register Transfer Level (RTL) and its behavior after being synthesized to gate-level netlists. Synthesis-simulation mismatch can occur because of the following reasons:
+1. Missing Sensitivity List
+2. Blocking vs Non-blocking assignments
+3. Non standard verilog coding
+
+#### **Missing Sensitivity List**
+Consider the verilog code and its corresponding graph shown below :
+```
+module mux(
+	input i0,i1,s,
+	output reg y
+)
+	always @(sel) begin
+		if(sel)
+			y = i1;
+		else
+			y = i0;
+	end
+endmodule
+```
+![mux_eg](./images/day_4/mux_eg.png)
+
+The "always" block is sensitive only to the "sel" signal. Whenever there's a modification in the "sel" output, it triggers a change in the output value. However, as this piece of code implies a multiplexer, the output should also change if the input changes. Since the sensitivity list includes only "sel," the output remains unaffected and it doesn't follow the input i0 when the sel is logic 0. Hence this a circuit behaves like a latch.
+
+In order to solve the problem all the critical signals needed to be mentioned in the sensitivity list. So the corrected code is given below :
+```
+module mux(
+	input i0,i1,s,
+	output reg y
+)
+	always @(*) begin //* - It considers changes in all the input signals
+		if(sel)
+			y = i1;
+		else
+			y = i0;
+	end
+endmodule
+```
 
 
 
