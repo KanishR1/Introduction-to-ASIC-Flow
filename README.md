@@ -501,7 +501,7 @@ endmodule
 Flattening the hierarchy means simplifying the hierarchical structure of a design by collapsing or merging lower-level modules or blocks into a single, unified representation. In yosys the flattening can be done with ***flat*** command. Yosys illustration of flattening the hiererchy.
 
 ```
-cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+ cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
  yosys
  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
  read_verilog 
@@ -517,7 +517,7 @@ cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
 
 The flatten command breaks the hierarchy and makes the design into a single module by creating AND and OR gates for the logics inferred by the submodule which is shown in the images above.
 
-**Synthesising a Submodule :**
+### **Synthesising a Submodule :**
 Suppose a multiplier design needs to be used in numerous instances. Rather than undergoing synthesis six times independently, the preferred approach is to synthesize it once and then duplicate it within the primary module. Using module-level synthesis becomes advantageous when dealing with multiple occurrences of identical modules. Another reason for synthesizing submodule is to follow the principle of divide and conque for extensive designs that may not be optimized effectively, synthesizing the design module by module ensures that each module is effectively optimized.
 
 **Steps to synthesis submodule :**
@@ -537,7 +537,7 @@ show
 ### **Flip-FLops**
 A flip-flop is a fundamental sequential synchronous electronic circuit that is capable of storing information. A single flip-flop can store 1- bit of information and several flip-flops can be grouped together to form registers and memory that can store multiple bits of information. There are several types of flip-flops like JK flip-flop, D flip-flop, T flip-flop and SR flip-flop but D flip-flop is widely and most commanly used since it transmits the input data to the output without performing any modifications. A D flop-flop needs two inputs : data and clock. The flip-flop can be positive-edge triggered or negative-edge triggered i.e, the output makes transition during the rising edge of the clock pulse if it is positive-edge triggered and if the output makes transition during the falling edge of the clock pulse then it is said to be negative- edge triggered.
 
-**Need of flip-flops**</br>
+### **Need of flip-flops**</br>
 In any electronic circuit there will always be an propagation delay. These delays may cause glitches in the output which may cause the output state to change when it is not supposed to. Glitches are unwanted transitions in the output. As an illustration consider the circuit shown below:
 
 ![glitch](./images/day_2/glitch.png)
@@ -577,6 +577,7 @@ dfflibmap  -liberty - Maps internal flip-flop cells to the flip-flop cells in th
 Generally in the flow there will be a separate .lib file for the flip-flops which needs to be used with the dfflibmap command.
 ___
 
+### **Illustration of Different types of Flip-flop** 
 **1. D flip-flop with Synchronous reset**</br>
 A D flip-flop with synchronous reset  combines the functionality of a D flip-flop with the ability to reset its state synchronously. This means that the flip-flop's stored value can be reset to 0 or low state based on a clock signal and a reset input, ensuring that the reset operation occurs when the clock signal transits.
 The verilog code, simulation and synthesis results are shown below:
@@ -703,6 +704,29 @@ In this design the 3-bit input number "a" is multiplied by 9 i.e.,(a*9) which ca
 ![opt_2](./images/day_2/opt_2.png)
 
 ![opt_2_net](./images/day_2/opt2_net.png)
+
+
+## Day - 3 : Combinational and Sequential Optimisations
+### **Logic Optimisations**
+In a broader context, Digital electronics encompasses two types of optimisations: Combinational and Sequential optimisations. These optimisations are done inorder to achieve designs that are efficient in terms of area, power, and performance.
+
+### **Combinational Optimisations**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [Reference Section]:#
 ## References
