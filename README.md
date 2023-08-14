@@ -711,6 +711,14 @@ In this design the 3-bit input number "a" is multiplied by 9 i.e.,(a*9) which ca
 In a broader context, Digital electronics encompasses two types of optimisations: Combinational and Sequential optimisations. These optimisations are done inorder to achieve designs that are efficient in terms of area, power, and performance.
 
 ### **Combinational Optimisations**
+The techniques used for optimising the combinational Circuits are as follows:
+1. Constant Propagation (Direct Optimisation)
+2. Boolean Logic Optimisation (using K-Map or Quine McCluskey method)
+
+#### **1. Constant Propagation Illustration**
+Consider the combinational circuit shown below :
+
+![const_propag](./images/day_3/const_propag.png)
 
 
 
