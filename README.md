@@ -877,11 +877,31 @@ On optimisation the above design becomes a 3 input AND gate as shown below :
 
 The synthesis result and the netlist is shown below :
 
-![opt_3_synth](./images/day_3/opt_2_synth.png)
+![opt_3_synth](./images/day_3/opt_3_synth.png)
 
 ![opt_3_net](./images/day_3/opt_3_net.png)
 
 
+#### **Example 4**
+The verilog code for the exampple 4 is given below :
+```
+module opt_check3 (input a , input b, input c , output y);
+	assign y = a?(c?b:0):0;
+endmodule
+```
+The above code infers two multiplexers as shown below : 
+
+![opt_4](./images/day_3/opt_4.png)
+
+On optimisation the above design becomes a 3 input AND gate as shown below :
+
+![opt_4_opt](./images/day_3/opt_4_opt.png)
+
+The synthesis result and the netlist is shown below :
+
+![opt_4_synth](./images/day_3/opt_4_synth.png)
+
+![opt_4_net](./images/day_3/opt_4_net.png)
 
 
 
