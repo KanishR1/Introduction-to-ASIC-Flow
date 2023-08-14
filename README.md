@@ -807,6 +807,7 @@ yosys
 read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
 read_verilog <module_name.v> 
 synth -top <top_module_name>
+# flatten # Use if multiple modules are present
 opt_clean -purge
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
@@ -818,7 +819,7 @@ ___
 ___
 
 #### **Example 1**
-The verilog code for the exampple 1 is given below :
+The verilog code for the example 1 is given below :
 ```
 module opt_check (input a , input b , output y);
 	assign y = a?b:0;
@@ -839,7 +840,7 @@ The synthesis result and the netlist is shown below :
 ![opt_1_net](./images/day_3/opt_1_netl.png)
 
 #### **Example 2**
-The verilog code for the exampple 2 is given below :
+The verilog code for the example 2 is given below :
 ```
 module opt_check2 (input a , input b , output y);
 	assign y = a?1:b;
@@ -861,7 +862,7 @@ The synthesis result and the netlist is shown below :
 
 
 #### **Example 3**
-The verilog code for the exampple 3 is given below :
+The verilog code for the example 3 is given below :
 ```
 module opt_check3 (input a , input b, input c , output y);
 	assign y = a?(c?b:0):0;
@@ -883,7 +884,7 @@ The synthesis result and the netlist is shown below :
 
 
 #### **Example 4**
-The verilog code for the exampple 4 is given below :
+The verilog code for the example 4 is given below :
 ```
 module opt_check3 (input a , input b, input c , output y);
 	assign y = a?(c?b:0):0;
@@ -903,7 +904,45 @@ The synthesis result and the netlist is shown below :
 
 ![opt_4_net](./images/day_3/opt_4_net.png)
 
+#### **Example 5**
+The verilog code for the example 5 is given below :
+```
+module sub_module1(input a , input b , output y);
+ assign y = a & b;
+endmodule
 
+
+module sub_module2(input a , input b , output y);
+ assign y = a^b;
+endmodule
+
+
+module multiple_module_opt(input a , input b , input c , input d , output y);
+wire n1,n2,n3;
+
+sub_module1 U1 (.a(a) , .b(1'b1) , .y(n1));
+sub_module2 U2 (.a(n1), .b(1'b0) , .y(n2));
+sub_module2 U3 (.a(b), .b(d) , .y(n3));
+
+assign y = c | (b & n1); 
+
+
+endmodule
+```
+
+The circuit inferred by the code is shown below : 
+
+![opt_5](./images/day_3/opt_5.png)
+
+On optimisation the above design becomes a AND OR gate as shown below :
+
+![opt_5_opt](./images/day_3/opt_5_opt.png)
+
+The synthesis result and the netlist is shown below :
+
+![opt_5_synth](./images/day_3/opt_5_synth.png)
+
+![opt_5_net](./images/day_3/opt_5_net.png)
 
 
 [Reference Section]:#
