@@ -893,7 +893,7 @@ The above code infers two multiplexers as shown below :
 
 ![opt_4](./images/day_3/opt_4.png)
 
-On optimisation the above design becomes a 3 input AND gate as shown below :
+On optimisation the above design becomes a 2 input XNOR gate as shown below :
 
 ![opt_4_opt](./images/day_3/opt_4_opt.png)
 
