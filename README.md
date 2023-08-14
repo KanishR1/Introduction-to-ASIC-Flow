@@ -1422,7 +1422,7 @@ module(
 endmodule
 ``` 
 
-
+### **Illustration of GLS and Synthesis Simulation Mismatch**
 
 
 
