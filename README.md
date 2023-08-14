@@ -1025,7 +1025,7 @@ The above code infers the circuit as shown below :
 
 ![sq_opt_1](./images/day_3/sq_opt_1.png)
 
-Since this code doesn't need optimisation it will infer an D flip-flop with asynchronous reset as shown above.
+Since this code doesn't need optimisation it will infer a D flip-flop with asynchronous reset as shown above.
 
 The simulation, synthesis result and the netlist are shown below :
 
@@ -1034,6 +1034,48 @@ The simulation, synthesis result and the netlist are shown below :
 ![sq_opt_1_synth](./images/day_3/sq_opt_1_synth.png)
 
 ![sq_opt_1_net](./images/day_3/sq_opt_1_net.png)
+
+All the standard cells by default have negative logic for reset and since in the code reset is mentioned as positive, an inverter is used for the reset signal. 
+
+
+
+#### **Example 2**
+The verilog code for the example 2 is given below :
+```
+module dff_const2(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+		q <= 1'b1;
+	else
+		q <= 1'b1;
+end
+endmodule
+```
+The above code infers a D flip-flop with asynchronous reset as shown below :
+
+![sq_opt_2](./images/day_3/sq_opt_2.png)
+
+The optimised design infers a direct connection of VDD (logic 1) to the output q as shown below:
+
+![sq_opt_2_opt](./images/day_3/sq_opt_2_opt.png)
+
+The simulation, synthesis result and the netlist are shown below :
+
+![sq_opt_2_sim](./images/day_3/sq_opt_2_sim.png)
+
+![sq_opt_2_synth](./images/day_3/sq_opt_2_synth.png)
+
+![sq_opt_2_net](./images/day_3/sq_opt_2_net.png)
+
+
+
+
+
+
+
+
+
 
 
 [Reference Section]:#
