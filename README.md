@@ -834,9 +834,9 @@ Since one of the inputs of the multiplexer is always connected to the ground it 
 
 The synthesis result and the netlist is shown below :
 
-![opt_1_synth](./images/day_3/opt_1_synth.png)
+![opt_1_synth](./images/day_3/opt_1_synt.png)
 
-![opt_1_net](./images/day_3/opt_1_net.png)
+![opt_1_net](./images/day_3/opt_1_netl.png)
 
 #### **Example 2**
 The verilog code for the exampple 2 is given below :
