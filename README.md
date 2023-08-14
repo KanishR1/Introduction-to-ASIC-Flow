@@ -1303,7 +1303,7 @@ Synthesis-simulation mismatch refers to the differences between the behavior of 
 2. Blocking vs Non-blocking assignments
 3. Non standard verilog coding
 
-#### **Missing Sensitivity List**
+#### **1. Missing Sensitivity List**
 Consider the verilog code and its corresponding graph shown below :
 ```
 module mux(
@@ -1328,7 +1328,7 @@ module mux(
 	input i0,i1,s,
 	output reg y
 )
-	always @(*) begin //* - It considers changes in all the input signals
+	always @(*) begin //* - It considers changes in all the input signals. So always is evaluated whenever any signal changes.
 		if(sel)
 			y = i1;
 		else
@@ -1336,6 +1336,8 @@ module mux(
 	end
 endmodule
 ```
+#### **2. Blocking and Non-Blocking Statements in Verilog**
+Blocking and Non-Blocking statemnets are very important statements. They must used with utmost care so that intended logic is created. These statements are used inside the always block.
 
 
 
