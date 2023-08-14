@@ -1188,10 +1188,107 @@ The simulation, synthesis result and the netlist are shown below :
 
 
 ### **Optimisation of Unused States**
-Consider the verilog code shown below :
+
+**Steps to simulate and generate the netlist for the below designs**
+
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
 ```
 
+Generating netlist steps :
 ```
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+opt_clean -purge
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
+
+
+Consider the verilog code shown below :
+```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = count[0];
+
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+
+endmodule
+```
+
+This verilog code will infer a 3-bit counter with asynchronous reset.
+The possible states of the counter are as follows :
+| count[2] count[1] count[0]  |COUNT[2] COUNT[1] COUNT[0] |
+|:---:|:---:|
+| 0 0 0 | 0 0 1  |
+| 0 0 1 | 0 1 0 |
+| 0 1 0 | 0 1 1 |
+| 0 1 1 | 1 0 0 |
+| 1 0 0 | 1 0 1 |
+| 1 0 1 | 1 1 0 |
+| 1 1 0 | 1 1 1 |
+| 1 1 1 | 0 0 0 |
+
+where count - Previous count
+	  COUNT - Preset count
+
+Since the output q is always assigned COUNT[0]. The other bits of the count are not used and not required. Instead of infering three flip-flops , on optimising the design it will infer a single D flip-flop and an inverter as shown below :
+
+![us_opt](./images/day_3/us_opt.png)
+
+The simulation, synthesis result and the netlist are shown below :
+
+![us_sim](./images/day_3/us_sim.png)
+
+![us_synth](./images/day_3/us_synth.png)
+
+![us_net](./images/day_3/us_net.png)
+
+
+Consider anothet verilog code shown below :
+```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = count==3'b100;
+
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+
+endmodule
+```
+In this case since q is asserted only when count == 3'b100, all the three flip-flops are used. Hence even after optimisation , the code will infer three flops.
+
+The simulation, synthesis result and the netlist are shown below :
+
+![us1_sim](./images/day_3/us1_sim.png)
+
+![us1_synth](./images/day_3/us1_synth.png)
+
+![us1_net](./images/day_3/us1_net.png)
+
+
+
+
+
+
 
 
 [Reference Section]:#
