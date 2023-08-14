@@ -1481,6 +1481,33 @@ The simulation, synthesis result , the netlist and the GLS are shown below :
 
 In this case there is no synthesis and simulation mismatch.
 
+#### **Example 2**
+Consider the verilog code shown below :
+```
+module bad_mux (input i0 , input i1 , input sel , output reg y);
+always @ (sel)
+begin
+	if(sel)
+		y <= i1;
+	else 
+		y <= i0;
+end
+endmodule
+```
+This code only has sel signal in sensitivity list. Hence the RTL simulation output will not match the expected specification.
+
+The simulation, synthesis result , the netlist and the GLS are shown below :
+
+![gls_2_sim](./images/day_4/gls_2_sim.png)
+
+![gls_2_synth](./images/day_4/gls_2_synth.png)
+
+![gls_2_net](./images/day_4/gls_2_net.png)
+
+![gls_2_gls](./images/day_4/gls_2_gls.png)
+
+In this case there is a synthesis and simulation mismatch. While performing synthesis yosys has corrected the sensitivity list error.
+
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
