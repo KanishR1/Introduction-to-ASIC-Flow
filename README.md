@@ -1187,7 +1187,11 @@ The simulation, synthesis result and the netlist are shown below :
 ![sq_opt_5_net](./images/day_3/sq_opt_5_net.png)
 
 
+### **Optimisation of Unused States**
+Consider the verilog code shown below :
+```
 
+```
 
 
 [Reference Section]:#
