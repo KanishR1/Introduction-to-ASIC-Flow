@@ -1344,6 +1344,88 @@ Blocking assignments are denoted using the "=" operator. When a blocking assignm
 **2. Non-blocking Assignment:**
 Non-blocking assignments are denoted using the "<=" operator. When a non-blocking assignment is encountered, the right-hand side value is scheduled to be assigned to the left-hand side variable at the end of the current simulation cycle. This means that all non-blocking assignments within a procedural block are executed simultaneously, updating variables concurrently. The value changes take effect in the next simulation cycle. Non-Blocking assignments are executed in parallel.
 
+#### **Caveats with Blocking Assignment**
+**Example 1**
+Consider the verilog code given below:
+```
+module code(
+	input clk,reset,d,
+	output reg q
+)
+	reg q0;
+	always @(posedge clk, posedge reset) begin
+		if(reset) begin
+			q=1'b0;
+			q0=1'b0;
+		end
+		else begin
+			q = q0; //Line 1
+			q0=d; // Line 2
+		end
+	end
+endmodule
+```
+The inetent of this code is to create a 2-bit shift register. Since blocking assignmnet is used for Line 1 and Line 2 both the lines will be executed sequentially. First line 1 will be executed creating a flip-flop whose input is q0 and output is q. Then line 2 will be executed which creates a second flip-flop whose input is d and output is q0 thereby connecting two flip-flops and creating a 2-bit shift register shown below:
+
+![cav_block](./images/day_4/cav_block.png)
+
+Consider the verilog code shown below :
+```
+module code(
+	input clk,reset,d,
+	output reg q
+)
+	reg q0;
+	always @(posedge clk, posedge reset) begin
+		if(reset) begin
+			q=1'b0;
+			q0=1'b0;
+		end
+		else begin
+			q0 = d; //Line 1
+			q=q0; // Line 2
+		end
+	end
+endmodule
+```
+This code looks similar to the previous one except that line 1 and line 2 are interchanged. Since , blocking assignment is used line 1 and line 2 will be executed sequentially. First line 1 will be executed which creates a D flip-flop with the input d and output q0, then line 2 is executed. Since q0 is already defined assigning q0 to q creates wire . Hence only flip-flop is inferred instead of two. The circuit corresponding to the code is shown below :
+
+![cav_block_1](./images/day_4/cav_block_1.png)
+
+
+**Example 2**
+Consider the verilog code shown below :
+```
+module(
+	input a,b,c,
+	output reg y
+)
+	reg q0;
+	always @(*) begin
+		y = q0 & c; //Line 1
+		q0 = a|b; //Line 2
+	end
+endmodule
+```
+In line 1 the output y is assigned with q0&c. But q0 is not mentioned anywhere before. Hence the previous value of the q0 will be taken and this will not infer a combinational circuit as expected instead a latch based circuit will be inferred. The corrected version of the code is shown below:
+```
+module(
+	input a,b,c,
+	output reg y
+)
+	reg q0;
+	always @(*) begin
+		q0 = a|b; //Line 1
+		y = q0 & c; //Line 2
+		
+	end
+endmodule
+``` 
+
+
+
+
+
 
 [Reference Section]:#
 ## References
