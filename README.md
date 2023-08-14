@@ -838,7 +838,7 @@ The synthesis result and the netlist is shown below :
 
 ![opt_1_net](./images/day_3/opt_1_net.png)
 
-#### **Example 2 **
+#### **Example 2**
 The verilog code for the exampple 2 is given below :
 ```
 module opt_check2 (input a , input b , output y);
