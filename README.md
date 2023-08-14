@@ -1242,7 +1242,7 @@ The possible states of the counter are as follows :
 | 1 1 0 | 1 1 1 |
 | 1 1 1 | 0 0 0 |
 
-where count - Previous count
+where count - Previous count</br>
 	  COUNT - Preset count
 
 Since the output q is always assigned COUNT[0]. The other bits of the count are not used and not required. Instead of infering three flip-flops , on optimising the design it will infer a single D flip-flop and an inverter as shown below :
