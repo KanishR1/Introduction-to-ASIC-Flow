@@ -1052,7 +1052,7 @@ begin
 end
 endmodule
 ```
-The above code infers a D flip-flop with asynchronous reset as shown below :
+The above code infers a D flip-flop with asynchronous set (reset signal is applied to set input) as shown below :
 
 ![sq_opt_2](./images/day_3/sq_opt_2.png)
 
@@ -1068,7 +1068,43 @@ The simulation, synthesis result and the netlist are shown below :
 
 ![sq_opt_2_net](./images/day_3/sq_opt_2_net.png)
 
+#### **Example 3**
+The verilog code for the example 3 is given below :
+```
+module dff_const3(input clk, input reset, output reg q);
+reg q1;
 
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+
+endmodule
+```
+The above code infers a two D flip-flop with asynchronous set and reset (reset signal is applied to set and reset input) as shown below :
+
+![sq_opt_3](./images/day_3/sq_opt_3.png)
+
+Since this code doesn't need optimisation it will infer a D flip-flop with asynchronous reset as shown above.
+
+The simulation, synthesis result and the netlist are shown below :
+
+![sq_opt_3_sim](./images/day_3/sq_opt_3_sim.png)
+
+At the timestamp 1550 the signal q1 changes from 0 to 1 but the output q transits from 1 to 0 for a clock cycle. It is because there will be a finite clock to q delay so the second flip-flop will sample the logic 0 at that rising edge of the clock. Hence there is a change in the output signal for one clock cycle. 
+
+![sq_opt_3_synth](./images/day_3/sq_opt_3_synth.png)
+
+![sq_opt_3_net](./images/day_3/sq_opt_3_net.png)
 
 
 
