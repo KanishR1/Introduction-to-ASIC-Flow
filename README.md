@@ -1508,6 +1508,33 @@ The simulation, synthesis result , the netlist and the GLS are shown below :
 
 In this case there is a synthesis and simulation mismatch. While performing synthesis yosys has corrected the sensitivity list error.
 
+
+#### **Example 3**
+Consider the verilog code shown below :
+```
+module blocking_caveat (input a , input b , input  c, output reg d); 
+reg x;
+always @ (*)
+begin
+	d = x & c; //Line 1
+	x = a | b; //Line 2
+end
+endmodule
+```
+This code only has signal x in line which is not defined before. Hence the previous value of x will be taken and the expression will be evaluated. Hence the RTL simulation output will not match the expected specification and will infer a latch based circuit instead of the combinational circuit.
+
+The simulation, synthesis result , the netlist and the GLS are shown below :
+
+![gls_3_sim](./images/day_4/gls_3_sim.png)
+
+![gls_3_synth](./images/day_4/gls_3_synth.png)
+
+![gls_3_net](./images/day_4/gls_3_net.png)
+
+![gls_3_gls](./images/day_4/gls_3_gls.png)
+
+In this case there is a synthesis and simulation mismatch. While performing synthesis yosys has corrected the latch error.
+
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
