@@ -1094,7 +1094,7 @@ The above code infers a two D flip-flop with asynchronous set and reset (reset s
 
 ![sq_opt_3](./images/day_3/sq_opt_3.png)
 
-Since this code doesn't need optimisation it will infer a D flip-flop with asynchronous reset as shown above.
+Since this code doesn't need optimisation it will infer two D flip-flop with asynchronous set and reset as shown above.
 
 The simulation, synthesis result and the netlist are shown below :
 
@@ -1107,8 +1107,84 @@ At the timestamp 1550 the signal q1 changes from 0 to 1 but the output q transit
 ![sq_opt_3_net](./images/day_3/sq_opt_3_net.png)
 
 
+#### **Example 4**
+The verilog code for the example 4 is given below :
+```
+module dff_const4(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b1;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+
+endmodule
+```
+The above code infers a two D flip-flop with asynchronous set(reset signal is applied to set input ) as shown below :
+
+![sq_opt_4](./images/day_3/sq_opt_4.png)
+
+The optimised design infers a direct connection of VDD (logic 1) to the output q as shown below:
+![sq_opt_4_opt](./images/day_3/sq_opt_4_opt.png)
+
+The simulation, synthesis result and the netlist are shown below :
+
+![sq_opt_4_sim](./images/day_3/sq_opt_4_sim.png)
+ 
+
+![sq_opt_4_synth](./images/day_3/sq_opt_4_synth.png)
+
+![sq_opt_4_net](./images/day_3/sq_opt_4_net.png)
 
 
+#### **Example 5**
+The verilog code for the example 5 is given below :
+```
+module dff_const5(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b0;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+
+endmodule
+```
+
+
+The above code infers a two D flip-flop with asynchronous reset  as shown below :
+
+![sq_opt_5](./images/day_3/sq_opt_5.png)
+
+Since this code doesn't need optimisation it will infer two D flip-flop with asynchronous reset as shown above.
+
+
+The simulation, synthesis result and the netlist are shown below :
+
+![sq_opt_5_sim](./images/day_3/sq_opt_5_sim.png)
+ 
+
+![sq_opt_5_synth](./images/day_3/sq_opt_5_synth.png)
+
+![sq_opt_5_net](./images/day_3/sq_opt_5_net.png)
 
 
 
