@@ -729,9 +729,17 @@ The boolean logic inferred is Y = ((AB)+C)'. If A is always tied to ground i.e.,
 The circuit that is given is implemented in NAND logic in order to prevent the stacking of the pmos. The transistor implementation clearly demonstrates a reduction in the required number of transistors for designing, decreasing from 12 to 2 in the optimised design. This will result in reduced power consumption and occuppies less area.
 
 #### **2. Boolean Logic Optimisation Illustration**
+Consider the verilog statement below : 
+```
+assign y = a?(b?c:(c?a:0)):(!c);
+```
+The ternary operator **(?:)** will realize a mux upon synthesis. The combinational circuit that corresponds to the above statement is shown below:
 
+![bl_gc](./images/day_3/bl_gc.png)
 
+This circuit can be optimised by writing the equivalent expression (or function) in boolean variables and minimising the function that will result in more optimised design which is shown below:
 
+![bl_opt](./images/day_3/bl_opt.png)
 
 
 
