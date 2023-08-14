@@ -480,6 +480,7 @@ endmodule
 
  In this case the module multiple_modules iinstantiates two sub_modules where the sub_module1 implements the AND gate and sub_module2 implemets the OR gate which are integrated in the multiple_modules.  Synthesis the multiple module using the sollowing commands:
  ```
+ # Remove "#" if needed
  cd /home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/verilog_files
  yosys
  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
@@ -562,6 +563,7 @@ gtkwave <dump_file_name.vcd>
 
 Generating netlist steps :
 ```
+# Remove "#" if needed
 yosys
 read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
 read_verilog <module_name.v> 
@@ -805,6 +807,7 @@ The maximum frequency with which the portion of circuit between A and B can be o
 
 Generating netlist steps :
 ```
+# Remove "#" if needed
 yosys
 read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
 read_verilog <module_name.v> 
@@ -997,6 +1000,7 @@ gtkwave <dump_file_name.vcd>
 
 Generating netlist steps :
 ```
+# Remove "#" if needed
 yosys
 read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
 read_verilog <module_name.v> 
@@ -1202,6 +1206,7 @@ gtkwave <dump_file_name.vcd>
 
 Generating netlist steps :
 ```
+# Remove "#" if needed
 yosys
 read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
 read_verilog <module_name.v> 
@@ -1424,8 +1429,57 @@ endmodule
 
 ### **Illustration of GLS and Synthesis Simulation Mismatch**
 
+**Steps to simulate, generate the netlist and to perform the GLS for the below designs**
 
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
 
+Generating netlist steps :
+```
+# Remove "#" if needed
+
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+# opt_clean -purge # If optimisation has to be done
+# dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib # if sequential circuit is used 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
+
+Steps to perform GLS:
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v <netlist_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+#### **Example 1**
+Consider the verilog code shown below :
+```
+module ternary_operator_mux (input i0 , input i1 , input sel , output y);
+	assign y = sel?i1:i0;
+endmodule
+```
+In verilog ternary operator will realize  multiplexer upin synthesis. If the operand left of the ? is true then output follows the immediate operand right of  ? otherwise the ouput follows the immediate operand to the right of :.
+
+The simulation, synthesis result , the netlist and the GLS are shown below :
+
+![gls_1_sim](./images/day_4/gls_1_sim.png)
+
+![gls_1_synth](./images/day_4/gls_1_synth.png)
+
+![gls_1_net](./images/day_4/gls_1_net.png)
+
+![gls_1_gls](./images/day_4/gls_1_gls.png)
+
+In this case there is no synthesis and simulation mismatch.
 
 [Reference Section]:#
 ## References
