@@ -742,8 +742,29 @@ This circuit can be optimised by writing the equivalent expression (or function)
 ![bl_opt](./images/day_3/bl_opt.png)
 
 
+### **Sequential Optimisations**
+The sequential logic optimisations techniques are broadly classified into two categories :
+1. Basic Techniques
+	a. Sequential Constant Propagation
+2. Advanced Techniques
+	a. State Optimisation
+	b. Retiming
+	c. Sequential Logic Cloning (Floor aware Synthesis)
 
+#### **1. Sequential Constant Propagation**
+Consider the sequential circuit shown below :
 
+![so_opt](./images/day_3/so_opt.png)
+
+The D flip-flop shown in the figure is positive edge triggered with asynchronous reset and the data input D is always tied to the ground (i.e, low state or logic 0). When reset is applied the output of the flop becomes low and if reset it deasserted the output of the flop still remains low. Hence one of the input to the NAND gate is always low resulting in the output Y to be always in high stae (logic 1 or VDD). Hence the optimised version of this circuit is connecting the output port Y directly to VDD i.e., the supply voltage.
+
+___
+***Note***:
+Consider the circuit shown below :
+![set_clar](./images/day_3/set_clar.png)
+
+This circuit is similar to the one that is discussed above except that it doesn't have asynchronous reset instead it has asynchronous set. When the set input is logic 1 then output of the flop i.e., Q becomes high otherwise Q follows D input which is logic 0. This circuit can't be optimised like the previous circuit discussed in the above section. Consider the waveform between 1
+___
 
 
 
