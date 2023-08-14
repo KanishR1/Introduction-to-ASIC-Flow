@@ -796,10 +796,41 @@ Suppose some part of the logic from combinational circuit between flop B and C i
 
 The maximum frequency with which the portion of circuit between A and B can be operated is 250MHz and the maximum frequency with which the portion of circuit between B and C can be operated is 333MHz. The effective frequency is minimum of the both which is 250MHz. Thus the effective maximum frequency has increased after performing the retiming.
 
+### **Illustration of Combinational Optimizsation:**
 
+**Steps to generate the netlist for the below designs**
 
+Generating netlist steps :
+```
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
 
+___
+**opt_clean** - remove unused cells and wires. The ***-purge*** switch removes internal nets if they have a public name. This command identifies wires and cells that are unused and removes them.  This command can be used to clean up after the commands that do the actual work.
+___
 
+#### **Example 1 **
+The verilog code for the exampple 1 is given below :
+```
+module opt_check (input a , input b , output y);
+	assign y = a?b:0;
+endmodule
+```
+The above code infers a multiplexer as shown below :
+![opt_1](./images/day_3/opt_1.png)
+Since one of the inputs of the multiplexer is always connected to the ground it will infer an AND gate on optimisation.
+![opt_1_opt](./images/day_3/opt_1_opt.png)
+
+The synthesis result and the netlist is shown below :
+![opt_1_synth](./images/day_3/opt_1_synth.png)
+![opt_1_net](./images/day_3/opt_1_net.png)
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
