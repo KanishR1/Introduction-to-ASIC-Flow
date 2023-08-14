@@ -833,7 +833,7 @@ Since one of the inputs of the multiplexer is always connected to the ground it 
 
 ![opt_1_opt](./images/day_3/opt_1_opt.png)
 
-The synthesis result and the netlist is shown below :
+The synthesis result and the netlist are shown below :
 
 ![opt_1_synth](./images/day_3/opt_1_synt.png)
 
@@ -854,7 +854,7 @@ Since one of the inputs of the multiplexer is always connected to the logic 1 it
 
 ![opt_2_opt](./images/day_3/opt_2_opt_des.png)
 
-The synthesis result and the netlist is shown below :
+The synthesis result and the netlist are shown below :
 
 ![opt_2_synth](./images/day_3/opt_2_synth.png)
 
@@ -876,7 +876,7 @@ On optimisation the above design becomes a 3 input AND gate as shown below :
 
 ![opt_3_opt](./images/day_3/opt_3_opt.png)
 
-The synthesis result and the netlist is shown below :
+The synthesis result and the netlist are shown below :
 
 ![opt_3_synth](./images/day_3/opt_3_synth.png)
 
@@ -898,7 +898,7 @@ On optimisation the above design becomes a 2 input XNOR gate as shown below :
 
 ![opt_4_opt](./images/day_3/opt_4_opt.png)
 
-The synthesis result and the netlist is shown below :
+The synthesis result and the netlist are shown below :
 
 ![opt_4_synth](./images/day_3/opt_4_synth.png)
 
@@ -938,7 +938,7 @@ On optimisation the above design becomes a AND OR gate as shown below :
 
 ![opt_5_opt](./images/day_3/opt_5_opt.png)
 
-The synthesis result and the netlist is shown below :
+The synthesis result and the netlist are shown below :
 
 ![opt_5_synth](./images/day_3/opt_5_synth.png)
 
@@ -975,12 +975,65 @@ On optimisation the above design becomes a direct connection of ground (logic 0)
 
 ![opt_6_opt](./images/day_3/opt_6_opt.png)
 
-The synthesis result and the netlist is shown below :
+The synthesis result and the netlist are shown below :
 
 ![opt_6_synth](./images/day_3/opt_6_synth.png)
 
 ![opt_6_net](./images/day_3/opt_6_net.png)
 
+
+### **Illustration of Sequential Optimizsation:**
+
+**Steps to simulate and generate the netlist for the below designs**
+
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+Generating netlist steps :
+```
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+# flatten # use if the multiple modules are present
+opt_clean -purge
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
+
+#### **Example 1**
+The verilog code for the example 1 is given below :
+```
+module dff_const1(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+		q <= 1'b0;
+	else
+		q <= 1'b1;
+end
+
+endmodule
+```
+The above code infers the circuit as shown below :
+
+![sq_opt_1](./images/day_3/sq_opt_1.png)
+
+Since this code doesn't need optimisation it will infer an D flip-flop with asynchronous reset as shown above.
+
+The simulation, synthesis result and the netlist are shown below :
+
+![sq_opt_1_sim](./images/day_3/sq_opt_1_sim.png)
+
+![sq_opt_1_synth](./images/day_3/sq_opt_1_synth.png)
+
+![sq_opt_1_net](./images/day_3/sq_opt_1_net.png)
 
 
 [Reference Section]:#
