@@ -1258,7 +1258,7 @@ The simulation, synthesis result and the netlist are shown below :
 ![us_net](./images/day_3/us_net.png)
 
 
-Consider anothet verilog code shown below :
+Consider another verilog code shown below :
 ```
 module counter_opt (input clk , input reset , output q);
 reg [2:0] count;
