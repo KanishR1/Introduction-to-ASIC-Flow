@@ -1338,7 +1338,11 @@ endmodule
 ```
 #### **2. Blocking and Non-Blocking Statements in Verilog**
 Blocking and Non-Blocking statemnets are very important statements. They must used with utmost care so that intended logic is created. These statements are used inside the always block.
+**1. Blocking Assignment:**
+Blocking assignments are denoted using the "=" operator. When a blocking assignment is executed, it directly assigns the right-hand side value to the left-hand side variable immediately within the current simulation cycle. The subsequent statements in the procedural block  will wait for this assignment to complete before proceeding. Blocking assignments are sequentially executed.
 
+**2. Non-blocking Assignment:**
+Non-blocking assignments are denoted using the "<=" operator. When a non-blocking assignment is encountered, the right-hand side value is scheduled to be assigned to the left-hand side variable at the end of the current simulation cycle. This means that all non-blocking assignments within a procedural block are executed simultaneously, updating variables concurrently. The value changes take effect in the next simulation cycle. Non-Blocking assignments are executed in parallel.
 
 
 [Reference Section]:#
