@@ -775,6 +775,17 @@ This technique is commonly employed in various scenarios such as redundancy for 
 
 Consider the circuit shown below : 
 
+![clo](./images/day_3/clo.png)
+
+Consider flop A has large positive slack. The flops B and C are far from flop A. Hence there will be a large routing delay from A to B and A to C. To avoid this flop A and the combinational logic 2 is replicated  or cloned in the paths of B and C as shown in the figure below. Since flop A has large positive slack the delay introduced because of the cloning will be compensated and the further delay in the circuit is mainly depended on flop B and flop C.
+
+![clo_opt](./images/day_3/clo_opt.png)
+
+#### **4. Retiming**
+Retiming  used to improve the performance interms of better timing characteristics by repositioning the registers (flip-flops) within the circuit without altering its functionality. In a digital circuit, registers (flip-flops) are used to store intermediate results and control the flow of data. The placement of these registers can significantly impact the circuit's overall performance, including its critical path delay, clock frequency, and power consumption. Retiming aims to optimize these factors by moving registers to appropriate locations within the circuit.
+
+Consider the circuit shown below :
+
 
 
 
