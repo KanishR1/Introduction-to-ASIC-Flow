@@ -728,6 +728,8 @@ The boolean logic inferred is Y = ((AB)+C)'. If A is always tied to ground i.e.,
 
 The circuit that is given is implemented in NAND logic in order to prevent the stacking of the pmos. The transistor implementation clearly demonstrates a reduction in the required number of transistors for designing, decreasing from 12 to 2 in the optimised design. This will result in reduced power consumption and occuppies less area.
 
+#### **2. Boolean Logic Optimisation Illustration**
+
 
 
 
