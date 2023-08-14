@@ -945,6 +945,44 @@ The synthesis result and the netlist is shown below :
 ![opt_5_net](./images/day_3/opt_5_net.png)
 
 
+
+#### **Example 6**
+The verilog code for the example 6 is given below :
+```
+module sub_module(input a , input b , output y);
+ assign y = a & b;
+endmodule
+
+
+
+module multiple_module_opt2(input a , input b , input c , input d , output y);
+wire n1,n2,n3;
+
+sub_module U1 (.a(a) , .b(1'b0) , .y(n1));
+sub_module U2 (.a(b), .b(c) , .y(n2));
+sub_module U3 (.a(n2), .b(d) , .y(n3));
+sub_module U4 (.a(n3), .b(n1) , .y(y));
+
+
+endmodule
+```
+
+The circuit inferred by the code is shown below : 
+
+![opt_6](./images/day_3/opt_6.png)
+
+On optimisation the above design becomes a direct connection of ground (logic 0) to output as shown below :
+
+![opt_6_opt](./images/day_3/opt_6_opt.png)
+
+The synthesis result and the netlist is shown below :
+
+![opt_6_synth](./images/day_3/opt_6_synth.png)
+
+![opt_6_net](./images/day_3/opt_6_net.png)
+
+
+
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
