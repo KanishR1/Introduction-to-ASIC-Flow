@@ -817,7 +817,7 @@ ___
 **opt_clean** - remove unused cells and wires. The ***-purge*** switch removes internal nets if they have a public name. This command identifies wires and cells that are unused and removes them.  This command can be used to clean up after the commands that do the actual work.
 ___
 
-#### **Example 1 **
+#### **Example 1**
 The verilog code for the exampple 1 is given below :
 ```
 module opt_check (input a , input b , output y);
@@ -858,6 +858,33 @@ The synthesis result and the netlist is shown below :
 ![opt_2_synth](./images/day_3/opt_2_synth.png)
 
 ![opt_2_net](./images/day_3/opt_2_net.png)
+
+
+#### **Example 3**
+The verilog code for the exampple 3 is given below :
+```
+module opt_check3 (input a , input b, input c , output y);
+	assign y = a?(c?b:0):0;
+endmodule
+```
+The above code infers two multiplexers as shown below : 
+
+![opt_3](./images/day_3/opt_3.png)
+
+On optimisation the above design becomes a 3 input AND gate as shown below :
+
+![opt_3_opt](./images/day_3/opt_3_opt.png)
+
+The synthesis result and the netlist is shown below :
+
+![opt_3_synth](./images/day_3/opt_2_synth.png)
+
+![opt_3_net](./images/day_3/opt_3_net.png)
+
+
+
+
+
 
 [Reference Section]:#
 ## References
