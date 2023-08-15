@@ -194,7 +194,7 @@ make test
 ### **Introduction to Simulator**
 A simulator is a software tool that can be used to check the functionality of a circuit design before it is implemented in hardware. It does this by simulating the behavior of the design in software, using a Hardware Description Language (HDL) such as Verilog or VHDL. The Register Tranfer Level (RTL) design is the actual Verilog code that implements the circuit i.e., the behavioural representation of the specification in a HDL language. To verify the correctness of the RTL design with the specification, a testbench is written in HDL and simulated using the open-source simulator, Icarus Verilog. The testbench generates stimulus signals that are applied to the RTL design, and the simulator monitors the output signals to ensure that they are correct. The simulator monitors changes in the input signals. When an input signal changes, the simulator re-evaluates the RTL design and updates the output signals. The simulator records the changes in the input and output signals in a file called a Value Change Dump (VCD) file. This file is used to visualize the behavior of the design over time in the form of waveforms. A tool called GTKWave is used to open the VCD file and view the which helps in debugging the design and verifying its functionality in accordance with the specification.
 
-![iverilog_based_simulation flow](./images/day_1/iverilog_based_simulation_flow.png)
+![iverilog_based_simulation flow](./images/week_2_day_1/iverilog_based_simulation_flow.png)
 
 **Steps to download the lab folder**</br>
 ```
@@ -209,7 +209,7 @@ Command to view the folder structure of the lab, and list the contents of the di
 cd ASIC/sky130RTLDesignAndSynthesisWorkshop/
 ls -l
 ```
-![folder_structure](./images/day_1/folder_structure.png)
+![folder_structure](./images/week_2_day_1/folder_structure.png)
 
 The lib folder contains all the library files needed for the lab, including the sky130 standard cell library. The verilog_model folder in ***/home/kanish/ASIC/sky130RTLDesignAndSynthesisWorkshop/my_lib*** contains the verilog models of the standard cells present in the .lib file. The verilog_files folder contains all the lab experiment verilog source files and corresponding testbench files needed to simulate the designs.
 
@@ -252,7 +252,7 @@ Commands to execute to view the waveform :
 gtkwave tb_good_mux.vcd
 ```
 
-![iverilog_gtkwave_demo](./images/day_1/ievrilog_gtkwave_demo.png)
+![iverilog_gtkwave_demo](./images/week_2_day_1/ievrilog_gtkwave_demo.png)
 
 
 ### **Description of the Verilog code**
@@ -318,9 +318,9 @@ endmodule
 ### **Introduction to Synthesizer**
 Synthesis is the process that converts RTL into a technology-specific gate-level netlist, optimized for a set of pre-defined constraints.Synthesizer is a tool used to convert the RTL from the netlist. Yosys is one such open source synthesizer.  A netlist is a file that represents the gates and flip-flops required to implement the design in hardware and the ineterconnections between them which is a result of the synthesis process. Yosys is provided with both the design and its corresponding .lib file, and its task is to generate the netlist. The netlist generated is a depiction of the input design provided to Yosys, contructed using the standard cells available in the .lib file. To validate the synthesis output, the netlist is verified in a manner analogous to how  the RTL design is verified. This involves using the same testbench and stimulus set to confirm that the outcomes obtained from the netlist correspond to those acquired when using the RTL design. The block diagram representation of the yosys flow and the netlist verification is shown below:
 
-![yosys_flow](./images/day_1/yosys_flow.png)
+![yosys_flow](./images/week_2_day_1/yosys_flow.png)
 
-![netlist_verification](./images/day_1/netlist_verification.png)
+![netlist_verification](./images/week_2_day_1/netlist_verification.png)
 
 
 
@@ -361,7 +361,7 @@ read_verilog good_mux.v
 
 ---
 
-![read_yosys_commands](./images/day_1/read_yosys_commands.png)
+![read_yosys_commands](./images/week_2_day_1/read_yosys_commands.png)
 
 
 
@@ -374,7 +374,7 @@ ___
 **synth** - command runs the default synthesis script. The ***-top*** switch use the specified module as top module.
 ___
 
-![synth_op](./images/day_1/synth_op.png)
+![synth_op](./images/week_2_day_1/synth_op.png)
 
 The output of the synthesis displays the number of wires used , number of standard cells used and the name of the standard cell. 
 
@@ -389,7 +389,7 @@ ___
 generate netlists for the specified cell library using the liberty file format.
 ___
 
-![abc_op](./images/day_1/abc_op.png)
+![abc_op](./images/week_2_day_1/abc_op.png)
 
 The output of the synthesis displays the number of input and output signals and the name of the standard cell that is used. 
 
@@ -403,7 +403,7 @@ ___
 **show** - Creates a graphviz DOT file for the selected part of the design and compile it to a graphics file. It generates a schematic.
 ___
 
-![show_op](./images/day_1/show_op.png)
+![show_op](./images/week_2_day_1/show_op.png)
 
 In the schematic there is sky130 based 2:1 multiplexer standard cell with three inputs and one output.
 
@@ -418,9 +418,9 @@ ___
 
 The netlist and the write_verilog command is shown below:
 
-![write_op](./images/day_1/write_op.png)
+![write_op](./images/week_2_day_1/write_op.png)
 
-![netlist_op](./images/day_1/netlist_op.png)
+![netlist_op](./images/week_2_day_1/netlist_op.png)
 
 
 
@@ -432,7 +432,7 @@ To view the contents inside the .lib file type the following command :
 cd ASIC/sky130RTLDesignAndSynthesisWorkshop/lib/
 gvim sky130_fd_sc_hd__tt_025C_1v80.lib
 ```
-![lib_img](./images/day_2/lib_img.png)
+![lib_img](./images/week_2_day_2/lib_img.png)
 
 One of the fundamental parameter stored within .lib files comprises PVT parameters, where P signifies Process, V represents Voltage, and T denotes Temperature. 
 The variations in these parameters can cause significant changes in the performance of circuits.
@@ -447,13 +447,13 @@ Further it contains the technology that is used is CMOS for which delay are mode
 
 Consider the a2111oi gate whose parameters and verilog files is shown below:
 
-![a2111o_img](./images/day_2/a2111o_img.png)
-![a2111o](./images/day_2/a2111o.png)
+![a2111o_img](./images/week_2_day_2/a2111o_img.png)
+![a2111o](./images/week_2_day_2/a2111o.png)
 
 This is a 2-input AND gate and a 4-input NOR gate. Within the .lib file, sevetral parameters specific to this particular standard cell is given, including leakage power values for every possible input combination, specifications regarding pin type and pin capacitances, internal power metrics, timing-related particulars, as well as area measurements and power-related specifics for the standard cells. Similarly for all the standard cells the parameters above mentioned is listed in the .lib file.
 
 Consider the different versions of the same logic gate shown below:
-![area_depict](./images/day_2/area_dep.png)
+![area_depict](./images/week_2_day_2/area_dep.png)
 
 In all the three the logic inferred is same bu the area is different. Wider cells consume more power but delay wise it is less. The leakage power in the wider cell is more compared to the narrow cell which is depicted in the image .
 
@@ -497,11 +497,11 @@ endmodule
  When using hierarchical design instead of enetering the ***show*** command to view the file ***show <module_name>*** must be otherwise yosys will generate the following error : "ERROR: For formats different than 'ps' or 'dot' only one module must be selected."
  ___
 
- ![hier_show](./images/day_2/hierarchi_des.png)
- ![netlist_hier](./images/day_2/netlist_hier.png)
+ ![hier_show](./images/week_2_day_2/hierarchi_des.png)
+ ![netlist_hier](./images/week_2_day_2/netlist_hier.png)
  
  Yosys does not show the AND gate and OR gate in the synthesis instead it shows the submodule names. The netlist also contains the AND and OR logic in separate submodules. Some times yosys may optimize the design such that the OR gate will be created using NAND gates. It is because the CMOS structure of the OR gate which is shown below has two pmos transistors stacked together. The mobility of the holes is less than the mobility of the electrons , since mosfets are majority carrier devices and majority carrier of the pmos is holes it increases the delay hence it becomes a bad circuit. In NAND gate implementation only the nmos are stacked.
- ![cmos_or](./images/day_2/CMOS_OR.jpg)
+ ![cmos_or](./images/week_2_day_2/CMOS_OR.jpg)
 
 Flattening the hierarchy means simplifying the hierarchical structure of a design by collapsing or merging lower-level modules or blocks into a single, unified representation. In yosys the flattening can be done with ***flat*** command. Yosys illustration of flattening the hiererchy.
 
@@ -517,8 +517,8 @@ Flattening the hierarchy means simplifying the hierarchical structure of a desig
  show
  write_verilog multiple_modules_flat.v
 ```
-![flat_des](./images/day_2/flat_des.png)
-![netlist_flat](./images/day_2/netlist_flat.png)
+![flat_des](./images/week_2_day_2/flat_des.png)
+![netlist_flat](./images/week_2_day_2/netlist_flat.png)
 
 The flatten command breaks the hierarchy and makes the design into a single module by creating AND and OR gates for the logics inferred by the submodule which is shown in the images above.
 
@@ -536,7 +536,7 @@ synth -top sub_module
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
 ```
-![submodule_demo](./images/day_2/submodule_synth.png)
+![submodule_demo](./images/week_2_day_2/submodule_synth.png)
 
 
 ### **Flip-FLops**
@@ -545,9 +545,9 @@ A flip-flop is a fundamental sequential synchronous electronic circuit that is c
 ### **Need of flip-flops**</br>
 In any electronic circuit there will always be an propagation delay. These delays may cause glitches in the output which may cause the output state to change when it is not supposed to. Glitches are unwanted transitions in the output. As an illustration consider the circuit shown below:
 
-![glitch](./images/day_2/glitch.png)
+![glitch](./images/week_2_day_2/glitch.png)
 
-![glitch_plot](./images/day_2/glitch_plot.png)
+![glitch_plot](./images/week_2_day_2/glitch_plot.png)
 
 The propagation delay of the OR gate is 1ns and AND gate is 2ns. Initially a,b,c are 0,0,1 and the internal node i0 is 0 and the output Y is high. At t=0ns there is change in the inputs a,b,c becomes 1,1,0. Because of the propagation delays of the AND gate and OR gate at t=1ns the output node transits from high to low and since the input to the OR gate both i0 and c are 0. At t=2ns the internal node i0 transists from 0 to 1 and  the inputs to the OR gate becomes 1 and 0. Since the propagation delay of the OR gate is 1ns the output Y becomes high at 3ns and remains stable. Between 1ns and 3ns the output made an unwanted change in the transition resulting in a glitch.  
 
@@ -599,9 +599,9 @@ end
 endmodule
 ```
 
-![sync_res](./images/day_2/sync_res.png)
+![sync_res](./images/week_2_day_2/sync_res.png)
 
-![sync_res_netlist](./images/day_2/sync_res_netlist.png)
+![sync_res_netlist](./images/week_2_day_2/sync_res_netlist.png)
 
 **2. D flip-flop with Asynchronous reset**</br>
 A D flip-flop with asynchronous reset combines the functionality of a D flip-flop with the ability to reset its state asynchronously. This means that the flip-flop's stored value can be reset to 0 or low state regardless of the clock signal's state.
@@ -618,9 +618,9 @@ end
 endmodule
 ```
 
-![async_simu](./images/day_2/async_simu.png)
+![async_simu](./images/week_2_day_2/async_simu.png)
 
-![async_res](./images/day_2/async_res.png)
+![async_res](./images/week_2_day_2/async_res.png)
 
 **3. D flip-flop with Asynchronous set**</br>
 A D flip-flop with asynchronous set combines the functionality of a D flip-flop with the ability to set its state asynchronously. This means that the flip-flop's stored value can be set to 1 or high state regardless of the clock signal's state.
@@ -638,9 +638,9 @@ end
 endmodule
 ```
 
-![async_set_simu](./images/day_2/async_set_simu.png)
+![async_set_simu](./images/week_2_day_2/async_set_simu.png)
 
-![async_set_net](./images/day_2/async_set_net.png)
+![async_set_net](./images/week_2_day_2/async_set_net.png)
 
 
 **4. D flip-flop with Asynchronous and Synchronous reset**</br>
@@ -662,9 +662,9 @@ end
 endmodule
 ```
 
-![async_sync_reset](./images/day_2/async_sync_reset.png)
+![async_sync_reset](./images/week_2_day_2/async_sync_reset.png)
 
-![async_sync_reset_netlist](./images/day_2/async_sync_reset_net.png)
+![async_sync_reset_netlist](./images/week_2_day_2/async_sync_reset_net.png)
 
 
 
@@ -693,9 +693,9 @@ This code performs multiplication of the input number by 2. Since the input is 3
 
 y0 is always 0 and the code doesn't need any hardware and it only needs the proper wiring of the input bits to the output and grounding the bit y0. The netlist of the design is shown below:
 
-![opt_1](./images/day_2/opt_1.png)
+![opt_1](./images/week_2_day_2/opt_1.png)
 
-![opt_net](./images/day_2/opt_net.png)
+![opt_net](./images/week_2_day_2/opt_net.png)
 
 **2. Optimisation Example 2**
 
@@ -707,9 +707,9 @@ endmodule
 ```
 In this design the 3-bit input number "a" is multiplied by 9 i.e.,(a*9) which can be re-written as (a\*8) + a . The term (a\*8) is nothing but a left shifting the number a by three bits. Consider that a = a2 a1 a0. (a\*8) results in a2 a1 a0 0 0 0. (a\*9)=(a\*8)+a = a2 a1 a0 a2 a1 a0 = aa(in 6 bit format). Hence in this case no hardware realization is required. The synthesized netlist of this design is shown below:
 
-![opt_2](./images/day_2/opt_2.png)
+![opt_2](./images/week_2_day_2/opt_2.png)
 
-![opt_2_net](./images/day_2/opt2_net.png)
+![opt_2_net](./images/week_2_day_2/opt2_net.png)
 
 
 ## Day - 3 : Combinational and Sequential Optimisations
@@ -724,13 +724,13 @@ The techniques used for optimising the combinational Circuits are as follows:
 #### **1. Constant Propagation Illustration**
 Consider the combinational circuit shown below :
 
-![const_propag](./images/day_3/const_propag.png)
+![const_propag](./images/week_2_day_3/const_propag.png)
 
 The boolean logic inferred is Y = ((AB)+C)'. If A is always tied to ground i.e., A = 0, then the expression will always evaluate to C'. In this case instead of having a AND gate and a NOR gate the circuit can be simplified by using a single NOT gate with C as its input. Even though both of then represent the same logic since the number of transistors used in the optimised design is less compared to that of the given circuit which shown in the above figure. The transistor level implementation of the given circuit and the optimised circuit is shown below :
 
-![gc_tran](./images/day_3/gc_tran.png)
+![gc_tran](./images/week_2_day_3/gc_tran.png)
 
-![oc_tran](./images/day_3/oc_tran.png)
+![oc_tran](./images/week_2_day_3/oc_tran.png)
 
 The circuit that is given is implemented in NAND logic in order to prevent the stacking of the pmos. The transistor implementation clearly demonstrates a reduction in the required number of transistors for designing, decreasing from 12 to 2 in the optimised design. This will result in reduced power consumption and occuppies less area.
 
@@ -741,11 +741,11 @@ assign y = a?(b?c:(c?a:0)):(!c);
 ```
 The ternary operator **(?:)** will realize a mux upon synthesis. The combinational circuit that corresponds to the above statement is shown below:
 
-![bl_gc](./images/day_3/bl_gc.png)
+![bl_gc](./images/week_2_day_3/bl_gc.png)
 
 This circuit can be optimised by writing the equivalent expression (or function) in boolean variables and minimising the function that will result in more optimised design which is shown below:
 
-![bl_opt](./images/day_3/bl_opt.png)
+![bl_opt](./images/week_2_day_3/bl_opt.png)
 
 
 ### **Sequential Optimisations**
@@ -760,14 +760,14 @@ The sequential logic optimisations techniques are broadly classified into two ca
 #### **1. Sequential Constant Propagation**
 Consider the sequential circuit shown below :
 
-![so_opt](./images/day_3/so_opt.png)
+![so_opt](./images/week_2_day_3/so_opt.png)
 
 The D flip-flop shown in the figure is positive edge triggered with asynchronous reset and the data input D is always tied to the ground (i.e, low state or logic 0). When reset is applied the output of the flop becomes low and if reset it deasserted the output of the flop still remains low. Hence one of the input to the NAND gate is always low resulting in the output Y to be always in high stae (logic 1 or VDD). Hence the optimised version of this circuit is connecting the output port Y directly to VDD i.e., the supply voltage.
 
 ___
 ***Note***: </br>
 Consider the circuit shown below :
-![set_clar](./images/day_3/set_clar.png)
+![set_clar](./images/week_2_day_3/set_clar.png)
 
 This circuit is similar to the one that is discussed above except that it doesn't have asynchronous reset instead it has asynchronous set. When the set input is logic 1 then output of the flop i.e., Q becomes high otherwise Q follows D input which is logic 0. This circuit can't be optimised like the previous circuit discussed in the above section. Consider the waveform between timestamp 1 and timestamp 2, the set pin is deasserted before the rising edge of the clock. The output Q remains high until the next rising edge even though the set input is deasseretd. The output of thr flop Q makes transition only at timestamp2. Therefore set input must be considered as Q'. This circuit can't be optimised.
 ___
@@ -781,24 +781,24 @@ This technique is commonly employed in various scenarios such as redundancy for 
 
 Consider the circuit shown below : 
 
-![clo](./images/day_3/clo.png)
+![clo](./images/week_2_day_3/clo.png)
 
 Consider flop A has large positive slack. The flops B and C are far from flop A. Hence there will be a large routing delay from A to B and A to C. To avoid this flop A and the combinational logic 2 is replicated  or cloned in the paths of B and C as shown in the figure below. Since flop A has large positive slack the delay introduced because of the cloning will be compensated and the further delay in the circuit is mainly depended on flop B and flop C.
 
-![clo_opt](./images/day_3/clo_opt.png)
+![clo_opt](./images/week_2_day_3/clo_opt.png)
 
 #### **4. Retiming**
 Retiming  used to improve the performance interms of better timing characteristics by repositioning the registers (flip-flops) within the circuit without altering its functionality. In a digital circuit, registers (flip-flops) are used to store intermediate results and control the flow of data. The placement of these registers can significantly impact the circuit's overall performance, including its critical path delay, clock frequency, and power consumption. Retiming aims to optimize these factors by moving registers to appropriate locations within the circuit.
 
 Consider the circuit shown below :
 
-![rt](./images/day_3/rt.png)
+![rt](./images/week_2_day_3/rt.png)
 
 Consider the C-Q delay and set up time is 0ns. The combinational circuits have finite amount of the propagation delay. The maximum clock frequency with which the circuit operates depends on the propagation delay of the combinational logic. From flop A to B the propagation delay is 5ns and the maximum frequency with which this portion of circuit can be operated is 200MHz. Fom flop B to C the propagation delay is 2ns and the maximum frequency with which this portion of circuit can be operated is 500MHz. The effective frequency is minimum of the both which is 200MHz.
 
 Suppose some part of the logic from combinational circuit between flop B and C is placed with the combinational circuit between the flop A and flop B in such a way that the propagation delay of the circuit between flop A and flop is reduced while propagation delay between flop B and flop C is increased by a small amount as show below :
 
-![rt_opt](./images/day_3/rt_opt.png)
+![rt_opt](./images/week_2_day_3/rt_opt.png)
 
 The maximum frequency with which the portion of circuit between A and B can be operated is 250MHz and the maximum frequency with which the portion of circuit between B and C can be operated is 333MHz. The effective frequency is minimum of the both which is 250MHz. Thus the effective maximum frequency has increased after performing the retiming.
 
@@ -833,17 +833,17 @@ endmodule
 ```
 The above code infers a multiplexer as shown below :
 
-![opt_1](./images/day_3/opt_1.png)
+![opt_1](./images/week_2_day_3/opt_1.png)
 
 Since one of the inputs of the multiplexer is always connected to the ground it will infer an AND gate on optimisation.
 
-![opt_1_opt](./images/day_3/opt_1_opt.png)
+![opt_1_opt](./images/week_2_day_3/opt_1_opt.png)
 
 The synthesis result and the netlist are shown below :
 
-![opt_1_synth](./images/day_3/opt_1_synt.png)
+![opt_1_synth](./images/week_2_day_3/opt_1_synt.png)
 
-![opt_1_net](./images/day_3/opt_1_netl.png)
+![opt_1_net](./images/week_2_day_3/opt_1_netl.png)
 
 #### **Example 2**
 The verilog code for the example 2 is given below :
@@ -854,17 +854,17 @@ endmodule
 ```
 The above code infers a multiplexer as shown below :
 
-![opt_2](./images/day_3/opt_2_opt.png)
+![opt_2](./images/week_2_day_3/opt_2_opt.png)
 
 Since one of the inputs of the multiplexer is always connected to the logic 1 it will infer an OR gate on optimisation. The OR gate will be NAND implementation since NOR gate has stacked pmos while NAND implementation has stacked nmos.
 
-![opt_2_opt](./images/day_3/opt_2_opt_des.png)
+![opt_2_opt](./images/week_2_day_3/opt_2_opt_des.png)
 
 The synthesis result and the netlist are shown below :
 
-![opt_2_synth](./images/day_3/opt_2_synth.png)
+![opt_2_synth](./images/week_2_day_3/opt_2_synth.png)
 
-![opt_2_net](./images/day_3/opt_2_net.png)
+![opt_2_net](./images/week_2_day_3/opt_2_net.png)
 
 
 #### **Example 3**
@@ -876,17 +876,17 @@ endmodule
 ```
 The above code infers two multiplexers as shown below : 
 
-![opt_3](./images/day_3/opt_3.png)
+![opt_3](./images/week_2_day_3/opt_3.png)
 
 On optimisation the above design becomes a 3 input AND gate as shown below :
 
-![opt_3_opt](./images/day_3/opt_3_opt.png)
+![opt_3_opt](./images/week_2_day_3/opt_3_opt.png)
 
 The synthesis result and the netlist are shown below :
 
-![opt_3_synth](./images/day_3/opt_3_synth.png)
+![opt_3_synth](./images/week_2_day_3/opt_3_synth.png)
 
-![opt_3_net](./images/day_3/opt_3_net.png)
+![opt_3_net](./images/week_2_day_3/opt_3_net.png)
 
 
 #### **Example 4**
@@ -898,17 +898,17 @@ endmodule
 ```
 The above code infers two multiplexers as shown below : 
 
-![opt_4](./images/day_3/opt_4.png)
+![opt_4](./images/week_2_day_3/opt_4.png)
 
 On optimisation the above design becomes a 2 input XNOR gate as shown below :
 
-![opt_4_opt](./images/day_3/opt_4_opt.png)
+![opt_4_opt](./images/week_2_day_3/opt_4_opt.png)
 
 The synthesis result and the netlist are shown below :
 
-![opt_4_synth](./images/day_3/opt_4_synth.png)
+![opt_4_synth](./images/week_2_day_3/opt_4_synth.png)
 
-![opt_4_net](./images/day_3/opt_4_net.png)
+![opt_4_net](./images/week_2_day_3/opt_4_net.png)
 
 #### **Example 5**
 The verilog code for the example 5 is given below :
@@ -938,17 +938,17 @@ endmodule
 
 The circuit inferred by the code is shown below : 
 
-![opt_5](./images/day_3/opt_5.png)
+![opt_5](./images/week_2_day_3/opt_5.png)
 
 On optimisation the above design becomes a AND OR gate as shown below :
 
-![opt_5_opt](./images/day_3/opt_5_opt.png)
+![opt_5_opt](./images/week_2_day_3/opt_5_opt.png)
 
 The synthesis result and the netlist are shown below :
 
-![opt_5_synth](./images/day_3/opt_5_synth.png)
+![opt_5_synth](./images/week_2_day_3/opt_5_synth.png)
 
-![opt_5_net](./images/day_3/opt_5_net.png)
+![opt_5_net](./images/week_2_day_3/opt_5_net.png)
 
 
 
@@ -975,17 +975,17 @@ endmodule
 
 The circuit inferred by the code is shown below : 
 
-![opt_6](./images/day_3/opt_6.png)
+![opt_6](./images/week_2_day_3/opt_6.png)
 
 On optimisation the above design becomes a direct connection of ground (logic 0) to output as shown below :
 
-![opt_6_opt](./images/day_3/opt_6_opt.png)
+![opt_6_opt](./images/week_2_day_3/opt_6_opt.png)
 
 The synthesis result and the netlist are shown below :
 
-![opt_6_synth](./images/day_3/opt_6_synth.png)
+![opt_6_synth](./images/week_2_day_3/opt_6_synth.png)
 
-![opt_6_net](./images/day_3/opt_6_net.png)
+![opt_6_net](./images/week_2_day_3/opt_6_net.png)
 
 
 ### **Illustration of Sequential Optimizsation:**
@@ -1030,17 +1030,17 @@ endmodule
 ```
 The above code infers the circuit as shown below :
 
-![sq_opt_1](./images/day_3/sq_opt_1.png)
+![sq_opt_1](./images/week_2_day_3/sq_opt_1.png)
 
 Since this code doesn't need optimisation it will infer a D flip-flop with asynchronous reset as shown above.
 
 The simulation, synthesis result and the netlist are shown below :
 
-![sq_opt_1_sim](./images/day_3/sq_opt_1_sim.png)
+![sq_opt_1_sim](./images/week_2_day_3/sq_opt_1_sim.png)
 
-![sq_opt_1_synth](./images/day_3/sq_opt_1_synth.png)
+![sq_opt_1_synth](./images/week_2_day_3/sq_opt_1_synth.png)
 
-![sq_opt_1_net](./images/day_3/sq_opt_1_net.png)
+![sq_opt_1_net](./images/week_2_day_3/sq_opt_1_net.png)
 
 All the standard cells by default have negative logic for reset and since in the code reset is mentioned as positive, an inverter is used for the reset signal. 
 
@@ -1061,19 +1061,19 @@ endmodule
 ```
 The above code infers a D flip-flop with asynchronous set (reset signal is applied to set input) as shown below :
 
-![sq_opt_2](./images/day_3/sq_opt_2.png)
+![sq_opt_2](./images/week_2_day_3/sq_opt_2.png)
 
 The optimised design infers a direct connection of VDD (logic 1) to the output q as shown below:
 
-![sq_opt_2_opt](./images/day_3/sq_opt_2_opt.png)
+![sq_opt_2_opt](./images/week_2_day_3/sq_opt_2_opt.png)
 
 The simulation, synthesis result and the netlist are shown below :
 
-![sq_opt_2_sim](./images/day_3/sq_opt_2_sim.png)
+![sq_opt_2_sim](./images/week_2_day_3/sq_opt_2_sim.png)
 
-![sq_opt_2_synth](./images/day_3/sq_opt_2_synth.png)
+![sq_opt_2_synth](./images/week_2_day_3/sq_opt_2_synth.png)
 
-![sq_opt_2_net](./images/day_3/sq_opt_2_net.png)
+![sq_opt_2_net](./images/week_2_day_3/sq_opt_2_net.png)
 
 #### **Example 3**
 The verilog code for the example 3 is given below :
@@ -1099,19 +1099,19 @@ endmodule
 ```
 The above code infers a two D flip-flop with asynchronous set and reset (reset signal is applied to set and reset input) as shown below :
 
-![sq_opt_3](./images/day_3/sq_opt_3.png)
+![sq_opt_3](./images/week_2_day_3/sq_opt_3.png)
 
 Since this code doesn't need optimisation it will infer two D flip-flop with asynchronous set and reset as shown above.
 
 The simulation, synthesis result and the netlist are shown below :
 
-![sq_opt_3_sim](./images/day_3/sq_opt_3_sim.png)
+![sq_opt_3_sim](./images/week_2_day_3/sq_opt_3_sim.png)
 
 At the timestamp 1550 the signal q1 changes from 0 to 1 but the output q transits from 1 to 0 for a clock cycle. It is because there will be a finite clock to q delay so the second flip-flop will sample the logic 0 at that rising edge of the clock. Hence there is a change in the output signal for one clock cycle. 
 
-![sq_opt_3_synth](./images/day_3/sq_opt_3_synth.png)
+![sq_opt_3_synth](./images/week_2_day_3/sq_opt_3_synth.png)
 
-![sq_opt_3_net](./images/day_3/sq_opt_3_net.png)
+![sq_opt_3_net](./images/week_2_day_3/sq_opt_3_net.png)
 
 
 #### **Example 4**
@@ -1138,19 +1138,19 @@ endmodule
 ```
 The above code infers a two D flip-flop with asynchronous set(reset signal is applied to set input ) as shown below :
 
-![sq_opt_4](./images/day_3/sq_opt_4.png)
+![sq_opt_4](./images/week_2_day_3/sq_opt_4.png)
 
 The optimised design infers a direct connection of VDD (logic 1) to the output q as shown below:
-![sq_opt_4_opt](./images/day_3/sq_opt_4_opt.png)
+![sq_opt_4_opt](./images/week_2_day_3/sq_opt_4_opt.png)
 
 The simulation, synthesis result and the netlist are shown below :
 
-![sq_opt_4_sim](./images/day_3/sq_opt_4_sim.png)
+![sq_opt_4_sim](./images/week_2_day_3/sq_opt_4_sim.png)
  
 
-![sq_opt_4_synth](./images/day_3/sq_opt_4_synth.png)
+![sq_opt_4_synth](./images/week_2_day_3/sq_opt_4_synth.png)
 
-![sq_opt_4_net](./images/day_3/sq_opt_4_net.png)
+![sq_opt_4_net](./images/week_2_day_3/sq_opt_4_net.png)
 
 
 #### **Example 5**
@@ -1179,19 +1179,19 @@ endmodule
 
 The above code infers a two D flip-flop with asynchronous reset  as shown below :
 
-![sq_opt_5](./images/day_3/sq_opt_5.png)
+![sq_opt_5](./images/week_2_day_3/sq_opt_5.png)
 
 Since this code doesn't need optimisation it will infer two D flip-flop with asynchronous reset as shown above.
 
 
 The simulation, synthesis result and the netlist are shown below :
 
-![sq_opt_5_sim](./images/day_3/sq_opt_5_sim.png)
+![sq_opt_5_sim](./images/week_2_day_3/sq_opt_5_sim.png)
  
 
-![sq_opt_5_synth](./images/day_3/sq_opt_5_synth.png)
+![sq_opt_5_synth](./images/week_2_day_3/sq_opt_5_synth.png)
 
-![sq_opt_5_net](./images/day_3/sq_opt_5_net.png)
+![sq_opt_5_net](./images/week_2_day_3/sq_opt_5_net.png)
 
 
 ### **Optimisation of Unused States**
@@ -1256,15 +1256,15 @@ COUNT - Preset count
 
 Since the output q is always assigned COUNT[0]. The other bits of the count are not used and not required. Instead of infering three flip-flops , on optimising the design it will infer a single D flip-flop and an inverter as shown below :
 
-![us_opt](./images/day_3/us_opt.png)
+![us_opt](./images/week_2_day_3/us_opt.png)
 
 The simulation, synthesis result and the netlist are shown below :
 
-![us_sim](./images/day_3/us_sim.png)
+![us_sim](./images/week_2_day_3/us_sim.png)
 
-![us_synth](./images/day_3/us_synth.png)
+![us_synth](./images/week_2_day_3/us_synth.png)
 
-![us_net](./images/day_3/us_net.png)
+![us_net](./images/week_2_day_3/us_net.png)
 
 
 Consider another verilog code shown below :
@@ -1287,11 +1287,11 @@ In this case since q is asserted only when count == 3'b100, all the three flip-f
 
 The simulation, synthesis result and the netlist are shown below :
 
-![us1_sim](./images/day_3/us1_sim.png)
+![us1_sim](./images/week_2_day_3/us1_sim.png)
 
-![us1_synth](./images/day_3/us1_synth.png)
+![us1_synth](./images/week_2_day_3/us1_synth.png)
 
-![us1_net](./images/day_3/us1_net.png)
+![us1_net](./images/week_2_day_3/us1_net.png)
 
 
 
@@ -1301,7 +1301,7 @@ The simulation, synthesis result and the netlist are shown below :
 ### **Gate Level Simulation**
 Gate Level Simulation helps ensure that the synthesized version of the design matches the specification both in terms of functionality and  timing. It helps identify mistakes and differences in the synthesised netlist and ensures that the final design functions as intended. Generally GLS is done to ensure that there is no synthesis-simulation mismatch. To perform the GLS the testbench that is used to verify the RTL is used. The GLS flow is similar to the testbench flow except that gate level verilog models are also used. It is necessary to mention the gatelevel verilog models  to iverilog to make the iverilog understand about the standard cell given in the library .GLS requires adding information about timing delays. Gate level Verilog models can be functional and timing aware. If the gate level models are delay annotated then it can used for timing validation. 
 
-![gls](./images/day_4/gls.png)
+![gls](./images/week_2_day_4/gls.png)
 
 ### **Synthesis-Simulation Mismatch**
 Synthesis-simulation mismatch refers to the differences between the behavior of a digital circuit as simulated at the Register Transfer Level (RTL) and its behavior after being synthesized to gate-level netlists. Synthesis-simulation mismatch can occur because of the following reasons:
@@ -1324,7 +1324,7 @@ module mux(
 	end
 endmodule
 ```
-![mux_eg](./images/day_4/mux_eg.png)
+![mux_eg](./images/week_2_day_4/mux_eg.png)
 
 The "always" block is sensitive only to the "sel" signal. Whenever there's a modification in the "sel" output, it triggers a change in the output value. However, as this piece of code implies a multiplexer, the output should also change if the input changes. Since the sensitivity list includes only "sel," the output remains unaffected and it doesn't follow the input i0 when the sel is logic 0. Hence this a circuit behaves like a latch.
 
@@ -1373,7 +1373,7 @@ endmodule
 ```
 The inetent of this code is to create a 2-bit shift register. Since blocking assignmnet is used for Line 1 and Line 2 both the lines will be executed sequentially. First line 1 will be executed creating a flip-flop whose input is q0 and output is q. Then line 2 will be executed which creates a second flip-flop whose input is d and output is q0 thereby connecting two flip-flops and creating a 2-bit shift register shown below:
 
-![cav_block](./images/day_4/cav_block.png)
+![cav_block](./images/week_2_day_4/cav_block.png)
 
 Consider the verilog code shown below :
 ```
@@ -1396,7 +1396,7 @@ endmodule
 ```
 This code looks similar to the previous one except that line 1 and line 2 are interchanged. Since , blocking assignment is used line 1 and line 2 will be executed sequentially. First line 1 will be executed which creates a D flip-flop with the input d and output q0, then line 2 is executed. Since q0 is already defined assigning q0 to q creates wire . Hence only flip-flop is inferred instead of two. The circuit corresponding to the code is shown below :
 
-![cav_block_1](./images/day_4/cav_block_1.png)
+![cav_block_1](./images/week_2_day_4/cav_block_1.png)
 
 
 **Example 2**
@@ -1472,13 +1472,13 @@ In verilog ternary operator will realize  multiplexer upin synthesis. If the ope
 
 The simulation, synthesis result , the netlist and the GLS are shown below :
 
-![gls_1_sim](./images/day_4/gls_1_sim.png)
+![gls_1_sim](./images/week_2_day_4/gls_1_sim.png)
 
-![gls_1_synth](./images/day_4/gls_1_synth.png)
+![gls_1_synth](./images/week_2_day_4/gls_1_synth.png)
 
-![gls_1_net](./images/day_4/gls_1_net.png)
+![gls_1_net](./images/week_2_day_4/gls_1_net.png)
 
-![gls_1_gls](./images/day_4/gls_1_gls.png)
+![gls_1_gls](./images/week_2_day_4/gls_1_gls.png)
 
 In this case there is no synthesis and simulation mismatch.
 
@@ -1499,13 +1499,13 @@ This code only has sel signal in sensitivity list. Hence the RTL simulation outp
 
 The simulation, synthesis result , the netlist and the GLS are shown below :
 
-![gls_2_sim](./images/day_4/gls_2_sim.png)
+![gls_2_sim](./images/week_2_day_4/gls_2_sim.png)
 
-![gls_2_synth](./images/day_4/gls_2_synth.png)
+![gls_2_synth](./images/week_2_day_4/gls_2_synth.png)
 
-![gls_2_net](./images/day_4/gls_2_net.png)
+![gls_2_net](./images/week_2_day_4/gls_2_net.png)
 
-![gls_2_gls](./images/day_4/gls_2_gls.png)
+![gls_2_gls](./images/week_2_day_4/gls_2_gls.png)
 
 In this case there is a synthesis and simulation mismatch. While performing synthesis yosys has corrected the sensitivity list error.
 
@@ -1526,19 +1526,50 @@ This code only has signal x in line which is not defined before. Hence the previ
 
 The simulation, synthesis result , the netlist and the GLS are shown below :
 
-![gls_3_sim](./images/day_4/gls_3_sim.png)
+![gls_3_sim](./images/week_2_day_4/gls_3_sim.png)
 
-![gls_3_synth](./images/day_4/gls_3_synth.png)
+![gls_3_synth](./images/week_2_day_4/gls_3_synth.png)
 
-![gls_3_net](./images/day_4/gls_3_net.png)
+![gls_3_net](./images/week_2_day_4/gls_3_net.png)
 
-![gls_3_gls](./images/day_4/gls_3_gls.png)
+![gls_3_gls](./images/week_2_day_4/gls_3_gls.png)
 
 In this case there is a synthesis and simulation mismatch. While performing synthesis yosys has corrected the latch error.
 
 
 
 ## Day - 5 : If, case, for and for generate
+
+### **If statement**
+if is a conditional statement that is used to execute the particular piece of the code  if the condition evaluates to true i.e, logic high otherwise the code inside the body of the else part will be executed. if statement is mainly used to create a priority logic.
+
+**Syntax for if-else**
+```
+if (cond) begin
+	<body>
+end
+else begin
+	<body>
+end
+```
+**Syntax for if-else if -else**
+```
+if (cond1) begin
+	<body>
+end
+else if (cond2) begin
+	<body>
+end
+else begin
+	<body>
+end
+```
+Since if statement is priority based the equivalent hardware realization of the if - else if - else is shown below :
+
+![if_elseif](./images/week_2_day_5/if_else_hard.png)
+
+In terms of hardware cond 1 gets the highest priority, then cond 2 gets the second priority and else part gets the least priority. In code perspective if any one of the condition evaluates to true then the body of that particular condition will be evaluated and then the execution leaves the entire if  else statements i.e, it will not evaluate the remaining conditions and it will start executing the statement after the if else statements.
+
 
 
 
