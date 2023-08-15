@@ -1991,6 +1991,69 @@ endgenerate
 ```
 The above code will create 10 instances of the AND gate at a time and all the 10 instances will work independently. Another example is ripple carry adder which can be coded using generate for loop since it consists of four full adders. 
 
+
+
+### **Illustration of for and generate for loops**
+
+**Steps to simulate, generate the netlist and to perform the GLS for the below designs**
+
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+Generating netlist steps :
+```
+# Remove "#" if needed
+
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+#flatten # if hierarchy is given
+# opt_clean -purge # If optimisation has to be done
+# dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib # if sequential circuit is used 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
+
+Steps to perform GLS:
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v <netlist_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+#### **Example 1 : Mux using for loop**
+Consider the verilog code shown below : 
+```
+module mux_generate (input i0 , input i1, input i2 , input i3 , input [1:0] sel  , output reg y);
+wire [3:0] i_int;
+assign i_int = {i3,i2,i1,i0};
+integer k;
+always @ (*)
+begin
+for(k = 0; k < 4; k=k+1) begin
+	if(k == sel)
+		y = i_int[k];
+end
+end
+endmodule
+```
+
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![for_1_sim](./images/week_2_day_5/for_1_sim.png)
+
+![for_1_synth](./images/week_2_day_5/for_1_synth.png)
+
+![for_1_net](./images/week_2_day_5/for_1_net.png)
+
+![for_1_gls](./images/week_2_day_5/for_1_gls.png)
+
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
