@@ -1822,7 +1822,7 @@ begin
 end
 endmodule
 ```
-In this code the if sel is 2'b10 or 2'b11 the asiignment value of y is not specified and also there is no default statement. Hence it will infer a latch with input to the en pin as sel[1]'. When sel == 2'b10 or 2'b11 the previous output value will be retained.
+In this code the if sel is 2'b10 or 2'b11 the assignment value of y is not specified and also there is no default statement. Hence it will infer a latch with input to the en pin as sel[1]'. When sel == 2'b10 or 2'b11 the previous output value will be retained.
 
 The simulation , synthesis result, netlist and GLS is shown below :
 
@@ -1833,6 +1833,38 @@ The simulation , synthesis result, netlist and GLS is shown below :
 ![case_1_net](./images/week_2_day_5/case_1_net.png)
 
 ![case_1_gls](./images/week_2_day_5/case_1_gls.png)
+
+#### **Example 2 : case with default**
+Consider the verilog code shown below : 
+```
+module comp_case (input i0 , input i1 , input i2 , input [1:0] sel, output reg y);
+always @ (*)
+begin
+	case(sel)
+		2'b00 : y = i0;
+		2'b01 : y = i1;
+		default : y = i2;
+	endcase
+end
+endmodule
+```
+In this code the if sel is 2'b10 or 2'b11 the assignment value of y is not specified but default statement is provided. Hence it will infer not infer a latch when sel == 2'b10 or 2'b11 instead it will execute the default statement and assign default value given to output .
+
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![case_2_sim](./images/week_2_day_5/case_2_sim.png)
+
+![case_2_synth](./images/week_2_day_5/case_2_synth.png)
+
+From synthesis report it is evident that latches are not inferred.
+
+![case_2_net](./images/week_2_day_5/case_2_net.png)
+
+![case_2_gls](./images/week_2_day_5/case_2_gls.png)
+
+
+
+
 
 
 
