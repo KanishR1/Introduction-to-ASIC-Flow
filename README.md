@@ -1617,6 +1617,56 @@ case (expression)
 endcase
 ```
 
+cosider an example code shown below:
+```
+always @(*) begin
+	case(sel)
+		2'b00 : y=a;
+		2'b01 : y=b;
+		2'b10 : y=c;
+		2'b11 : y=d;
+	endcase
+end
+```
+The equivalent hardware realization diagram is shown below:
+
+![case_hardware](./images/week_2_day_5/case_hardware.png)
+
+
+#### **Caveats with case**
+1. Incomplete case statement :
+Incomplete case statement i.e., case statement without all the possible values of the expression will result in inferred latch. Consider the piece of code given below :
+```
+always @(*) begin
+	case(sel)
+		2'b00 : y=a;
+		2'b01 : y=b;
+	endcase
+end
+```
+Since for the other two combinations of the sel signal the output is not specified. Hence it will infer a latch as shown below :
+
+![case_latch](./images/week_2_day_5/case_latch.png)
+
+In order to avoid the inferred latch in case statement, it is recommended to code case with deafault statement as shown below :  
+```
+always @(*) begin
+	case(sel)
+		2'b00 : y=a;
+		2'b01 : y=b;
+		default : y=c;
+	endcase
+end
+```
+When sel is 2'b10 or 2'b11 then the default statement in case will be executed. The equivalent hardware realization diagram is shown below :
+
+![case_default](./images/week_2_day_5/case_default.png)
+
+2. Partial assignment :
+
+
+
+
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
