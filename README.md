@@ -1582,10 +1582,40 @@ else if(cond2)
 ```
 In this code else part is not given. As a result if both the condition evaluates to false then the hardware will latch i.e, it will retain the previous value and crete the combinational loop. The hardware and the logic diagram realization of the code is shown below :
 
+
 ![comb_loop](./images/week_2_day_5/comb_loop.png)
+
 
 ![hardware_comb_loop](./images/week_2_day_5/hardware_comb_loop.png)
 
+
+There should not be an latch until it is intended. For example in counter incomplete if statement is written in order to create a latch. Consider the counter code shown below :
+```
+always @(posedge clk, posedge reset) begin
+	if(reset)
+		count<=3'b000;
+	else if(en)
+		count<=count+1;
+end
+```
+This code will realize a latch as else part is not mentioned and it will not have any adverse effects. The counter should retain its previous value if en is not asserted. The hardware realization diagram is shown below :
+
+![counter_latch](./images/week_2_day_5/counter_latch.png)
+
+
+### **Case Statement**
+If and case statement are used inside the always block. The variables that are assigned inside case should be reg datatype. case statement is used to implement multi-way branching based on the value of an expression. It provides an alternative to using multiple if-else statements when needed to compare a single value against a set of possible values. The difference between case and if else statement is case statement is not priority based and it will infer a single multiplexer with 2^n inputs whereas if else statement is based on the priority and it will infer multiple 2:1 multiplexers.
+
+**Syntax for case statement**
+```
+case (expression)
+    value_1: // Code to execute if expression matches value_1
+    value_2: // Code to execute if expression matches value_2
+    // ...
+    value_n: // Code to execute if expression matches value_n
+    default: // Code to execute if none of the values match
+endcase
+```
 
 [Reference Section]:#
 ## References
