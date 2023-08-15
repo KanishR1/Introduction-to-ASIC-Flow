@@ -2084,6 +2084,42 @@ The simulation , synthesis result, netlist and GLS is shown below :
 ![for_2_gls](./images/week_2_day_5/for_2_gls.png)
 
 
+#### **Example 3 : Illustration of generate for using Ripple Carry Adder**
+Consider the verilog code shown below : 
+```
+module fa (input a , input b , input c, output co , output sum);
+	assign {co,sum}  = a + b + c ;
+endmodule
+
+module rca (input [7:0] num1 , input [7:0] num2 , output [8:0] sum);
+wire [7:0] int_sum;
+wire [7:0]int_co;
+
+genvar i;
+generate
+	for (i = 1 ; i < 8; i=i+1) begin
+		fa u_fa_1 (.a(num1[i]),.b(num2[i]),.c(int_co[i-1]),.co(int_co[i]),.sum(int_sum[i]));
+	end
+
+endgenerate
+fa u_fa_0 (.a(num1[0]),.b(num2[0]),.c(1'b0),.co(int_co[0]),.sum(int_sum[0]));
+
+
+assign sum[7:0] = int_sum;
+assign sum[8] = int_co[7];
+endmodule
+```
+The above ripple carry adder code consists of a full adder submodule which is instantiated 7 times inside the generate for loop. This creates a 8 bit ripple carry adder.
+
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![gen_1_sim](./images/week_2_day_5/gen_1_sim.png)
+
+![gen_1_synth](./images/week_2_day_5/gen_1_synth.png)
+
+![gen_1_net](./images/week_2_day_5/gen_1_net.png)
+
+![gen_1_gls](./images/week_2_day_5/gen_1_gls.png)
 
 
 
