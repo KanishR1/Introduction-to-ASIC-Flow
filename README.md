@@ -330,7 +330,6 @@ The .lib file is a library of standard cells that can be used to implement any l
 
 It is necessary to provide information for the synthesis toolregarding the choice of cells. Overuse of faster cells increases area and power demands, while also it leads to hold time violations. Conversely, excessive use of slower cells results in poor performance requirements. The optimal cell selection for the synthesizer is guided by constraints that dictate the appropriate cell set to use.
 
-### **Setup Time and Hold Time**
 
 ### **Yosys Illustration**
 **Step 1:** Change the current working directory to the directory containing the Verilog files using the following command :
