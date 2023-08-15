@@ -1728,8 +1728,27 @@ gtkwave <dump_file_name.vcd>
 #### **Example 1**
 Consider the verilog code shown below : 
 ```
-
+module incomp_if (input i0 , input i1 , input i2 , output reg y);
+always @ (*)
+begin
+	if(i0)
+		y <= i1;
+end
+endmodule
 ```
+In this code the else statement is not mentioned. Hence it will infer a latch with input to the en pin as i0. When i0 is 0 the previous value will be retained.
+
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![if_1_sim](./images/week_2_day_5/if_1_sim.png)
+
+![if_1_synth](./images/week_2_day_5/if_1_synth.png)
+
+![if_1_net](./images/week_2_day_5/if_1_net.png)
+
+![if_1_gls](./images/week_2_day_5/if_1_gls.png)
+
+
 
 [Reference Section]:#
 ## References
