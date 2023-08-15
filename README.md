@@ -1863,7 +1863,37 @@ From synthesis report it is evident that latches are not inferred.
 ![case_2_gls](./images/week_2_day_5/case_2_gls.png)
 
 
+#### **Example 3 : Partial case assignment**
+Consider the verilog code shown below : 
+```
+module partial_case_assign (input i0 , input i1 , input i2 , input [1:0] sel, output reg y , output reg x);
+always @ (*)
+begin
+	case(sel)
+		2'b00 : begin
+			y = i0;
+			x = i2;
+			end
+		2'b01 : y = i1;
+		default : begin
+		           x = i1;
+			   y = i2;
+			  end
+	endcase
+end
+endmodule
+```
+In this code the if sel is 2'b10 or 2'b11 the assignment value of x is not specified and evn though there is a default statement it will infer a latch with input to the en pin as sel[1]' for x because of the partial assignment. When sel == 2'b10 or 2'b11 the previous output value of x will be retained.
 
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![case_3_sim](./images/week_2_day_5/case_3_sim.png)
+
+![case_3_synth](./images/week_2_day_5/case_3_synth.png)
+
+![case_3_net](./images/week_2_day_5/case_3_net.png)
+
+![case_3_gls](./images/week_2_day_5/case_3_gls.png)
 
 
 
