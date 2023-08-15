@@ -1774,6 +1774,68 @@ The simulation , synthesis result, netlist and GLS is shown below :
 
 ![if_2_gls](./images/week_2_day_5/if_2_gls.png)
 
+
+
+### **Illustration of inferred latches in case statement**
+
+**Steps to simulate, generate the netlist and to perform the GLS for the below designs**
+
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+Generating netlist steps :
+```
+# Remove "#" if needed
+
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+# opt_clean -purge # If optimisation has to be done
+# dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib # if sequential circuit is used 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
+
+Steps to perform GLS:
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v <netlist_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+#### **Example 1**
+Consider the verilog code shown below : 
+```
+module incomp_case (input i0 , input i1 , input i2 , input [1:0] sel, output reg y);
+always @ (*)
+begin
+	case(sel)
+		2'b00 : y = i0;
+		2'b01 : y = i1;
+	endcase
+end
+endmodule
+```
+In this code the if sel is 2'b10 or 2'b11 the asiignment value of y is not specified and also there is no default statement. Hence it will infer a latch with input to the en pin as sel[1]'. When sel == 2'b10 or 2'b11 the previous output value will be retained.
+
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![case_1_sim](./images/week_2_day_5/case_1_sim.png)
+
+![case_1_synth](./images/week_2_day_5/case_1_synth.png)
+
+![case_1_net](./images/week_2_day_5/case_1_net.png)
+
+![case_1_gls](./images/week_2_day_5/case_1_gls.png)
+
+
+
 [Reference Section]:#
 ## References
 1.  https://yosyshq.net/yosys/
