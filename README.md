@@ -8,6 +8,7 @@
 	* [Day - 2 : Timing libs, Hierarchical vs Flat Synthesis and Efficient flop coding styles](#day---2--timing-libs-hierarchical-vs-flat-synthesis-and-efficient-flop-coding-styles)
 	* [Day - 3 : Combinational and Sequential Optimisations](#day---3--combinational-and-sequential-optimisations)
 	* [Day - 4 : Gate Level Simulation (GLS), Blocking Vs Non-blocking assignment and Synthesis-Simulation Mismatch](#day---4--gate-level-simulation-gls-blocking-vs-non-blocking-assignment-and-synthesis-simulation-mismatch)
+	* [Day - 5 : If, case, for and for generate](#day---5--if-case-for-and-for-generate)
 
 - [References](#references)
 
@@ -1534,6 +1535,14 @@ The simulation, synthesis result , the netlist and the GLS are shown below :
 ![gls_3_gls](./images/day_4/gls_3_gls.png)
 
 In this case there is a synthesis and simulation mismatch. While performing synthesis yosys has corrected the latch error.
+
+
+
+## Day - 5 : If, case, for and for generate
+
+
+
+
 
 [Reference Section]:#
 ## References
