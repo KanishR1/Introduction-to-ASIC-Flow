@@ -1928,8 +1928,68 @@ From simulation it is evident that when sel == 1'b0 then somehow the output beco
 
 Upon synthesis yosys has rectified the mistake and it inferred a 4:1 multiplexer and when sel == 2'b10 output follows i2. This is evident from the GLS shown in the above figure. 
 
+### **Looping Constructs**
+In verilog there are two synthesizable looping constructs :
+	1. for loop
+	2. generate for
+For loop is used inside the always blovk while the generate for is used outside the always block.
 
+#### **For loop**
+For loop is a construct that allows  to repeatedly execute a block of code for a fixed number of iterations. It is commonly used for generating sequences, initializing arrays, and performing repetitive operations.
 
+**Syntax of for loop**
+```
+for (initialization; condition; increment) begin
+    // Code to execute in each iteration
+end
+```
+Consider the example for the for loop given below :
+
+```
+integer i;
+always @(*) begin
+	for(i=0;i<32;i=i+1)
+		if(i==sel)
+			y=inp[i];
+end
+``` 
+The above code creates a 32:1 multiplexer. If the multiplexer is created using if or case statement it is difficult to list out all possible combinations for the select statement when the number of inputs increase. But using for loop it is easier to code and it can be easily converted into other higher input multiplexers by changing the condition.
+
+Consider another example for the for loop shown below:
+```
+integer i;
+always @(*) begin
+	op_bus = 8'b0;
+	for(i=0;i<8;i=i+1)
+		if(sel==i)
+			op_bus[i]=inp;
+end
+```
+The above code creates a 8:1 demultiplexer. In this code blocking statement is used to initialize the op_bus to zero. It is done to ensure the functionality of the demultiplexer since only one of the channel in the output bus will be high and rest of the channel will be zero.
+
+#### **Generate for**
+Generate for loop is used to replicate or generate multiple instances of a logic block based on a loop. Generate statements are particularly convenient when the same operation or module instance is repeated for multiple bits of a vector, or when certain Verilog code is conditionally included based on parameter .definitions.
+
+**Syntax for generate for loop**
+```
+genvar index; // Declare a generate variable
+generate
+    for (index = initial_value; index < limit_value; index = index + step_value) begin
+        // Logic to be generated
+    end
+endgenerate
+```
+
+Consider the example shown below:
+```
+genvar i;
+generate 
+	for(i=0;i<8;i=i+1) begin
+		and u(.a(in1[i]),..b(in2[i]), .y(op[i]));
+	end
+endgenerate
+```
+The above code will create 10 instances of the AND gate at a time and all the 10 instances will work independently. Another example is ripple carry adder which can be coded using generate for loop since it consists of four full adders. 
 
 [Reference Section]:#
 ## References
