@@ -1570,9 +1570,21 @@ Since if statement is priority based the equivalent hardware realization of the 
 
 In terms of hardware cond 1 gets the highest priority, then cond 2 gets the second priority and else part gets the least priority. In code perspective if any one of the condition evaluates to true then the body of that particular condition will be evaluated and then the execution leaves the entire if  else statements i.e, it will not evaluate the remaining conditions and it will start executing the statement after the if else statements.
 
+#### Danger/Caution with if 
+If the "if else" statement is not properly coded i.e., "incomplete if" then it may result in inferred latches. An inferred latch is an unintended storage element that can be generated in a hardware design when a synthesizer cannot determine a unique value for a signal under certain conditions. This can occur when a signal is assigned a value inside an "if-else" block without providing values for all possible conditions.
 
+Consider the piece of code shown below:
+```
+if(cond1)
+	y=a;
+else if(cond2)
+	y=b;
+```
+In this code else part is not given. As a result if both the condition evaluates to false then the hardware will latch i.e, it will retain the previous value and crete the combinational loop. The hardware and the logic diagram realization of the code is shown below :
 
+![comb_loop](./images/week_2_day_5/comb_loop.png)
 
+![hardware_comb_loop](./images/week_2_day_5/hardware_comb_loop.png)
 
 
 [Reference Section]:#
