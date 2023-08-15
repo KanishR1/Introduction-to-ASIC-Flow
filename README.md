@@ -1736,7 +1736,7 @@ begin
 end
 endmodule
 ```
-In this code the else statement is not mentioned. Hence it will infer a latch with input to the en pin as i0. When i0 is 0 the previous value will be retained.
+In this code the else statement is not mentioned. Hence it will infer a latch with input to the en pin as i0. When i0 is 0 the previous output value will be retained.
 
 The simulation , synthesis result, netlist and GLS is shown below :
 
@@ -1748,7 +1748,31 @@ The simulation , synthesis result, netlist and GLS is shown below :
 
 ![if_1_gls](./images/week_2_day_5/if_1_gls.png)
 
+#### **Example 2**
+Consider the verilog code shown below : 
+```
+module incomp_if2 (input i0 , input i1 , input i2 , input i3, output reg y);
+always @ (*)
+begin
+	if(i0)
+		y <= i1;
+	else if (i2)
+		y <= i3;
 
+end
+endmodule
+```
+In this code the else statement is not mentioned. Hence it will infer a latch with input to the en pin as (i0 OR i2). When i0 and i2 both 0 simultaneously the previous output value will be retained.
+
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![if_2_sim](./images/week_2_day_5/if_2_sim.png)
+
+![if_2_synth](./images/week_2_day_5/if_2_synth.png)
+
+![if_2_net](./images/week_2_day_5/if_2_net.png)
+
+![if_2_gls](./images/week_2_day_5/if_2_gls.png)
 
 [Reference Section]:#
 ## References
