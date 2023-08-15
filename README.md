@@ -1634,7 +1634,7 @@ The equivalent hardware realization diagram is shown below:
 
 
 #### **Caveats with case**
-1. Incomplete case statement :
+**1. Incomplete case statement**
 Incomplete case statement i.e., case statement without all the possible values of the expression will result in inferred latch. Consider the piece of code given below :
 ```
 always @(*) begin
@@ -1662,10 +1662,74 @@ When sel is 2'b10 or 2'b11 then the default statement in case will be executed. 
 
 ![case_default](./images/week_2_day_5/case_default.png)
 
-2. Partial assignment :
+**2. Partial assignment**
+Consider the code given below :
+```
+always @(*) begin
+	case(sel)
+		2'b00 : begin x=a; y=b; end
+		2'b10 : y=a;
+		default : begin x=c;y=d; end
+	endcase
+end
+```
+In this code when the sel signal is 2'b10, the value of x is not assigned. Even though default statement is given because of the partial assignment it will infer an latch as shown below :
 
+![partial_assignment](./images/week_2_day_5/partial_ass.png)
 
+**3. Overlapping Case**
+Consider the code given below :
+```
+always @(*) begin
+	case(sel)
+		2'b00 : body 1;
+		2'b01 : body 2;
+		2'b10 : body 3;
+		2'b1? : body 4;
+	endcase
+end
+```
+? - Take any value.
+Unlike if statement if one condition evaluates to true then rest of the condition are not checked, in case all the values are checked even if a value matches. In this code if sel == 2'b10, the body 3 will be executed. After completing the body 3 , body 4 will also be executed since sel == 2'b1?. ? can take 0 or 1. Thus there will be an unpredictable output.
 
+### **Illustration of inferred latches in if statement**
+
+**Steps to simulate, generate the netlist and to perform the GLS for the below designs**
+
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+Generating netlist steps :
+```
+# Remove "#" if needed
+
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+# opt_clean -purge # If optimisation has to be done
+# dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib # if sequential circuit is used 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
+
+Steps to perform GLS:
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v <netlist_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+
+#### **Example 1**
+Consider the verilog code shown below : 
+```
+
+```
 
 [Reference Section]:#
 ## References
