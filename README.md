@@ -1883,7 +1883,7 @@ begin
 end
 endmodule
 ```
-In this code the if sel is 2'b10 or 2'b11 the assignment value of x is not specified and evn though there is a default statement it will infer a latch with input to the en pin as sel[1]' for x because of the partial assignment. When sel == 2'b10 or 2'b11 the previous output value of x will be retained.
+In this code the if sel is 2'b10 or 2'b11 the assignment value of x is not specified and evn though there is a default statement it will infer a latch with input to the en pin as sel[1] OR sel[0]' for x because of the partial assignment. When sel == 2'b10 or 2'b11 the previous output value of x will be retained.
 
 The simulation , synthesis result, netlist and GLS is shown below :
 
@@ -1894,6 +1894,39 @@ The simulation , synthesis result, netlist and GLS is shown below :
 ![case_3_net](./images/week_2_day_5/case_3_net.png)
 
 ![case_3_gls](./images/week_2_day_5/case_3_gls.png)
+
+#### **Example 4 : Overlapping case assignment**
+Consider the verilog code shown below : 
+```
+module bad_case (input i0 , input i1, input i2, input i3 , input [1:0] sel, output reg y);
+always @(*)
+begin
+	case(sel)
+		2'b00: y = i0;
+		2'b01: y = i1;
+		2'b10: y = i2;
+		2'b1?: y = i3;
+		//2'b11: y = i3;
+	endcase
+end
+
+endmodule
+```
+In this code the if sel is 2'b10, then there is an overlapping case with 2'b10 and 2'b1? as ? can take both 0 and 1. This will not infer a latch but there will be a synthesis simulation mismatch and output is unpredictable.
+
+The simulation , synthesis result, netlist and GLS is shown below :
+
+![case_4_sim](./images/week_2_day_5/case_4_sim.png)
+
+From simulation it is evident that when sel == 1'b0 then somehow the output becomes high. But when sel == 2'b11, the output follows i3. 
+
+![case_4_synth](./images/week_2_day_5/case_4_synth.png)
+
+![case_4_net](./images/week_2_day_5/case_4_net.png)
+
+![case_4_gls](./images/week_2_day_5/case_4_gls.png)
+
+Upon synthesis yosys has rectified the mistake and it inferred a 4:1 multiplexer and when sel == 2'b10 output follows i2. This is evident from the GLS shown in the above figure. 
 
 
 
