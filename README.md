@@ -9,7 +9,7 @@
 	* [Day - 3 : Combinational and Sequential Optimisations](#day---3--combinational-and-sequential-optimisations)
 	* [Day - 4 : Gate Level Simulation (GLS), Blocking Vs Non-blocking assignment and Synthesis-Simulation Mismatch](#day---4--gate-level-simulation-gls-blocking-vs-non-blocking-assignment-and-synthesis-simulation-mismatch)
 	* [Day - 5 : If, case, for and for generate](#day---5--if-case-for-and-for-generate)
-
+- [Acknowledgement](#acknowledgement)
 - [References](#references)
 
 ## Week - 1 
@@ -330,6 +330,7 @@ The .lib file is a library of standard cells that can be used to implement any l
 
 It is necessary to provide information for the synthesis toolregarding the choice of cells. Overuse of faster cells increases area and power demands, while also it leads to hold time violations. Conversely, excessive use of slower cells results in poor performance requirements. The optimal cell selection for the synthesizer is guided by constraints that dictate the appropriate cell set to use.
 
+### **Setup Time and Hold Time**
 
 ### **Yosys Illustration**
 **Step 1:** Change the current working directory to the directory containing the Verilog files using the following command :
@@ -2123,8 +2124,12 @@ The simulation , synthesis result, netlist and GLS is shown below :
 
 
 
-
-
+[Acknowledgement Section]:#
+## Acknowledgement
+1. Kunal Ghosh, VSD Corp. Pvt. Ltd.
+2. Sumanto Kar, Sr. Project Technical Assistant , IIT Bombay
+3. Alwin Shaju, Colleague IIITB
+4. Adam Teman, Associate Professor at Bar-Ilan University in Ramat Gan, Israel   
 
 [Reference Section]:#
 ## References
@@ -2139,3 +2144,4 @@ The simulation , synthesis result, netlist and GLS is shown below :
 9.  https://yosyshq.readthedocs.io/projects/yosys/en/latest/cmd_ref.html
 10. https://www.youtube.com/watch?v=EczW2IWdnOM
 11. https://learn.digilentinc.com/Documents/277
+
