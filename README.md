@@ -1,4 +1,4 @@
-# IIITB_Physical_Design_Using_ASIC_Class
+# Introduction to ASIC Flow 
 
 ## Table of Contents
 - [Week - 1](#week---1)
